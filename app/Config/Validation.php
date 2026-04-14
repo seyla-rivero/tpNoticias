@@ -41,4 +41,14 @@ class Validation extends BaseConfig
     // --------------------------------------------------------------------
     // Rules
     // --------------------------------------------------------------------
+    public array $noticia = [
+    'titulo' => [
+        'label' => 'Título',
+        'rules' => 'required|min_length[10]|max_length[100]'
+    ],
+    'descripcion' => [
+        'label' => 'Descripción',
+        'rules' => 'required|min_length[50]'
+    ],
+    ];
 }

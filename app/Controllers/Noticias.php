@@ -21,6 +21,9 @@ class Noticias extends BaseController
 
     public function guardar()
     {
+         if (!$this->validate('noticia')) {
+            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+        }
         $model = new NoticiaModel();
 
         // 🔹 Detectar qué botón se presionó

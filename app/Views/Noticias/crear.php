@@ -24,32 +24,41 @@
     ">
         Crear Noticia
         </h3>
+        
 
-        <form method="post" action="/app_tp1/public/noticias/guardar" enctype="multipart/form-data">
+        <form id="formNoticia" method="post" action="/app_tp1/public/noticias/guardar" enctype="multipart/form-data">
 
             <!-- TITULO -->
             <label><b>Título:</b></label><br>
-            <input type="text" name="titulo" style="
+            <input type="text"  id="titulo" name="titulo" class="<?= session('errors.titulo') ? 'input-error' : '' ?>" style="
                 width:100%;
                 padding:10px;
                 border-radius:8px;
                 box-sizing:border-box;
-                border:none;
                 margin-top:5px;
                 margin-bottom:15px;
             ">
+            <?php if (session('errors.titulo')): ?>
+            <p style="color:red; font-size:14px;">
+               <?= session('errors.titulo') ?>
+            </p>
+            <?php endif; ?>
 
             <!-- DESCRIPCION -->
             <label><b>Descripción:</b></label><br>
-            <textarea name="descripcion" style="
+            <textarea name="descripcion" class="<?= session('errors.titulo') ? 'input-error' : '' ?>" style="
                 width:100%;
                 padding:10px;
                 border-radius:8px;
                 box-sizing:border-box;
-                border:none;
                 margin-top:5px;
                 margin-bottom:15px;
             "></textarea>
+            <?php if (session('errors.descripcion')): ?>
+            <p style="color:red; font-size:14px;">
+                <?= session('errors.descripcion') ?>
+            </p>
+            <?php endif; ?>
 
             <!-- IMAGEN -->
             <label><b>Insertar imagen:</b></label><br>
@@ -63,7 +72,7 @@
                 margin-top:10px;
                 margin-bottom:40px;
             ">
-                <input type="file" name="imagen">
+                <input type="file" id="imagen" name="imagen">
             </div>
 
             <!-- BOTONES -->
@@ -95,9 +104,36 @@
             </div>
 
         </form>
+                <!-- EL MODAL DE GUARDAR CAMBIOS -->
+        <div id="modalError" class="modal">
+        <div class="modal-content">
+            <h2>Atención</h2>
+            <p>Llene todos los campos</p>
+            <button class="btn-cerrar" onclick="cerrarModal()">Cerrar</button>
+        </div>
+        </div>
 
     </div>
-
+      
 </div>
+<script>
+function mostrarModal() {
+  document.getElementById("modalError").style.display = "flex";
+}
+
+function cerrarModal() {
+  document.getElementById("modalError").style.display = "none";
+}
+
+document.getElementById("formNoticia").addEventListener("submit", function(e) {
+  let titulo = document.getElementById("titulo").value;
+  let imagen = document.getElementById("imagen").value;
+
+  if (titulo === "" || imagen === "") {
+    e.preventDefault();
+    mostrarModal();
+  }
+});
+</script>        
 
 <?= $this->endSection() ?>
