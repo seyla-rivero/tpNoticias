@@ -6,6 +6,6 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 $routes->get('/', 'Home::index');
-$routes->get('/tareas', 'Tareas::index');
-$routes->get('/tareas/crear', 'Tareas::crear');
-$routes->post('/tareas/guardar', 'Tareas::guardar');
+$routes->get('/noticias', 'Noticias::index');
+$routes->get('/noticias/crear', 'Noticias::crear');
+$routes->post('/noticias/guardar', 'Noticias::guardar');
