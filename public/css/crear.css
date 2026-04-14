@@ -1,0 +1,17 @@
+.btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-guardar { background: #6c7ae0; }
+.btn-guardar:hover { background: #4f5bd5; }
+
+.btn-validar { background: #3b82f6; }
+.btn-validar:hover { background: #2563eb; }
+
+.btn-anular { background: #ef4444; }
+.btn-anular:hover { background: #dc2626; }
