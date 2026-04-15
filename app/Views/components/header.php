@@ -25,22 +25,83 @@
     <!-- DERECHA -->
 <div style="position: relative; display: flex; align-items: center; gap: 10px;">
 
+<?php if (session()->get('logueado')): ?>
+
     <!-- AVATAR -->
     <img src="/app_tp1/public/img/avatar.png"
          onclick="toggleUserMenu()"
-         alt="Perfil"
-         style="
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            cursor: pointer;
-            object-fit: cover;
-         ">
+         style="width:35px; height:35px; border-radius:50%; cursor:pointer;">
 
-    <!-- NOMBRE USUARIO -->
-    <span style="font-size: 14px;">
-        Usuario Editor
-    </span>
+    <!-- NOMBRE -->
+    <span><?= session()->get('nombre') ?></span>
+
+    <!-- MENU -->
+    <div id="userMenu" style="
+        display:none;
+        position:absolute;
+        top:50px;
+        right:0;
+        background:white;
+        border:1px solid #ddd;
+        border-radius:10px;
+        box-shadow:0 4px 10px rgba(0,0,0,0.15);
+        padding:10px;
+        min-width:160px;
+        z-index:2000;
+    ">
+
+        <div style="font-size:12px; color:#888; margin-bottom:5px;">
+            Sesión iniciada como
+        </div>
+
+        <div style="font-weight:bold; margin-bottom:10px;">
+            <?= session()->get('nombre') ?>
+        </div>
+
+        <a href="<?= base_url('index.php/logout') ?>" style="
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            padding:10px;
+            text-decoration:none;
+            background:#7e7777;
+            color:white;
+            border-radius:8px;
+            font-size:14px;
+            transition:0.2s;
+        "
+        onmouseover="this.style.background='#3b3838'"
+        onmouseout="this.style.background='#7e7777'">
+
+            Cerrar sesión
+
+        </a>
+
+    </div>
+
+<?php else: ?>
+   
+    <div onclick="abrirLogin()" style="
+        display:flex;
+        align-items:center;
+        gap:8px;
+        cursor:pointer;
+    ">
+
+        <!-- ICONO -->
+        <img src="/app_tp1/public/img/avatar.png"
+            style="width:35px; height:35px; border-radius:50%;">
+
+        <!-- TEXTO -->
+        <span style="font-weight:500;">
+            Iniciar sesión
+        </span>
+
+    </div>
+
+<?php endif; ?>
+
+</div>
 
     <!-- MENÚ DESPLEGABLE -->
     <div id="userMenu" style="
@@ -56,20 +117,6 @@
         min-width: 150px;
         z-index: 2000;
     ">
-
-        <a href="/app_tp1/public/logout" style="
-        display: block;
-        padding: 8px;
-        text-decoration: none;
-        color: #333;
-        border-radius: 6px;
-    "
-        onmouseover="this.style.background='#f2f2f2'"
-        onmouseout="this.style.background='white'"
-    >
-    🔓 Cerrar sesión
-        </a>
-
     </div>
 
 </div>

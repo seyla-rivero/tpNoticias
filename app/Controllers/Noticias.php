@@ -6,32 +6,31 @@ use App\Models\NoticiaModel;
 
 class Noticias extends BaseController
 {
-    public function index()
-    {
-        $model = new NoticiaModel();
+   public function index()
+{
+    $model = new NoticiaModel();
 
-        $buscar = $this->request->getGet('buscar');
-        $estado = $this->request->getGet('estado');
+    $buscar = $this->request->getGet('buscar');
+    $estado = $this->request->getGet('estado');
 
-        $builder = $model;
-
-        // FILTRAR POR USUARIO LOGUEADO
-        $builder = $builder->where('autor_id', session()->get('id'));
-
-        // BUSCAR POR TITULO
-        if (!empty($buscar)) {
-            $builder = $builder->like('titulo', $buscar);
-        }
-
-        // FILTRAR POR ESTADO
-        if (!empty($estado)) {
-            $builder = $builder->where('estado', $estado);
-        }
-
-        $data['noticias'] = $builder->findAll();
-
-        return view('Noticias/index', $data);
+    // 👇 SOLO si está logueado filtrás por usuario
+    if (session()->get('logueado')) {
+        $usuario_id = session()->get('id');
+        $model = $model->where('autor_id', $usuario_id);
     }
+
+    if (!empty($buscar)) {
+        $model = $model->like('titulo', $buscar);
+    }
+
+    if (!empty($estado)) {
+        $model = $model->where('estado', $estado);
+    }
+
+    $data['noticias'] = $model->findAll();
+
+    return view('Noticias/index', $data);
+}
 
     public function crear()
     {
