@@ -50,5 +50,9 @@ class Validation extends BaseConfig
         'label' => 'Descripción',
         'rules' => 'required|min_length[50]'
     ],
+    'imagen' => [
+        'label' => 'Imagen',
+        'rules' => 'if_exist|max_size[imagen,2048]|is_image[imagen]|mime_in[imagen,image/jpg,image/jpeg,image/png]'
+    ],
     ];
 }

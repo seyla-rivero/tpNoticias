@@ -30,14 +30,10 @@
 
             <!-- TITULO -->
             <label><b>Título:</b></label><br>
-            <input type="text"  id="titulo" name="titulo" class="<?= session('errors.titulo') ? 'input-error' : '' ?>" style="
-                width:100%;
-                padding:10px;
-                border-radius:8px;
-                box-sizing:border-box;
-                margin-top:5px;
-                margin-bottom:15px;
-            ">
+            <input type="text" id="titulo" name="titulo"
+                value="<?= old('titulo') ?>" 
+                class="<?= session('errors.titulo') ? 'input-error' : '' ?>"
+                style="width:100%; padding:10px; border-radius:8px; box-sizing:border-box; margin-top:5px; margin-bottom:5px;">
             <?php if (session('errors.titulo')): ?>
             <p style="color:red; font-size:14px;">
                <?= session('errors.titulo') ?>
@@ -46,14 +42,10 @@
 
             <!-- DESCRIPCION -->
             <label><b>Descripción:</b></label><br>
-            <textarea name="descripcion" class="<?= session('errors.titulo') ? 'input-error' : '' ?>" style="
-                width:100%;
-                padding:10px;
-                border-radius:8px;
-                box-sizing:border-box;
-                margin-top:5px;
-                margin-bottom:15px;
-            "></textarea>
+            <textarea name="descripcion"
+                class="<?= session('errors.descripcion') ? 'input-error' : '' ?>"
+                style="width:100%; padding:10px; border-radius:8px; box-sizing:border-box; margin-top:5px; margin-bottom:5px;"
+                ><?= old('descripcion') ?></textarea>
             <?php if (session('errors.descripcion')): ?>
             <p style="color:red; font-size:14px;">
                 <?= session('errors.descripcion') ?>
@@ -61,7 +53,7 @@
             <?php endif; ?>
 
             <!-- IMAGEN -->
-            <label><b>Insertar imagen:</b></label><br>
+            <label><b>Imagen(Opcional)</b></label><br>
             <div style="
                 background:white;
                 height:150px;
@@ -96,7 +88,7 @@
                     Enviar a validación
                     </button>
 
-                    <button class="btn btn-anular" type="button">
+                    <button class="btn btn-anular" type="submit" value="anular">
                     Anular
                     </button>
                 </div>
@@ -108,7 +100,7 @@
         <div id="modalError" class="modal">
         <div class="modal-content">
             <h2>Atención</h2>
-            <p>Llene todos los campos</p>
+            <p>El título y la descrición son obligatorios.</p>
             <button class="btn-cerrar" onclick="cerrarModal()">Cerrar</button>
         </div>
         </div>
@@ -126,10 +118,10 @@ function cerrarModal() {
 }
 
 document.getElementById("formNoticia").addEventListener("submit", function(e) {
-  let titulo = document.getElementById("titulo").value;
-  let imagen = document.getElementById("imagen").value;
+  let titulo = document.getElementById("titulo").value.trim();
+  let descripcion = document.querySelector("textarea[name='descripcion']").value.trim();
 
-  if (titulo === "" || imagen === "") {
+  if (titulo === "" || descripcion === "") {
     e.preventDefault();
     mostrarModal();
   }

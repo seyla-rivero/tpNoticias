@@ -3,6 +3,7 @@
 <head>
     <title>Panel</title>
     <link rel="stylesheet" href="/app_tp1/public/css/crear.css">
+    <link rel="stylesheet" href="/app_tp1/public/css/MisNoticias.css">
 </head>
 <body style="margin:0; font-family: Arial;">
 
