@@ -90,6 +90,8 @@
 
     </div>
 </div>
+
+
 <div id="loginFormModal" style="
     display:none;
     position:fixed;
@@ -129,6 +131,8 @@
     </div>
 
 </div>
+
+
 <div id="registroModal" style="
     display:none;
     position:fixed;
@@ -136,30 +140,42 @@
     left:0;
     width:100%;
     height:calc(100% - 65px);
-    background:#2F4A8A;
+    background:rgba(0,0,0,0.5);
     justify-content:center;
     align-items:center;
     z-index:3000;
 ">
 
     <div style="
-        background:#e6e6e6;
-        padding:40px 30px;
-        border-radius:15px;
-        width:350px;
+        background:#f2f2f2;
+        padding:35px 30px;
+        border-radius:18px;
+        width:400px;
         text-align:center;
         border:3px solid #3bb3ff;
-        box-shadow:0 10px 25px rgba(0,0,0,0.2);
+        box-shadow:0 15px 30px rgba(0,0,0,0.25);
         position:relative;
     ">
 
-        <span onclick="cerrarRegistro()" style="float:right; cursor:pointer;">✖</span>
+        <!-- CERRAR -->
+        <span onclick="cerrarRegistro()" style="
+            position:absolute;
+            top:15px;
+            right:18px;
+            cursor:pointer;
+            font-size:20px;
+            font-weight:bold;
+        ">✖</span>
 
         <!-- LOGO -->
         <img src="/app_tp1/public/img/logo-noticias.png"
-             style="width:80px; margin-bottom:15px;">
+             style="width:70px; margin-bottom:10px;">
 
-        <h2 style="margin-bottom:25px;">
+        <h2 style="
+            margin-bottom:25px;
+            font-weight:bold;
+            letter-spacing:1px;
+        ">
             GESTIÓN DE NOTICIAS
         </h2>
 

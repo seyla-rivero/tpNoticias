@@ -1,1 +1,0 @@
-<?= view('components/login_form') ?>

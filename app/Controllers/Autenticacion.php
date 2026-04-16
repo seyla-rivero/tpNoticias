@@ -6,11 +6,7 @@ use App\Models\UsuarioModel;
 
 class Autenticacion extends BaseController
 {
-    public function registro()
-    {
-        return view('registro'); 
-    }
-
+    
     public function guardar()
     {
         $model = new UsuarioModel();
@@ -32,10 +28,7 @@ class Autenticacion extends BaseController
 
         return redirect()->to('/login');
     }
-    public function login()
-{
-    return view('login'); 
-}
+    
 
     public function validar()
     {

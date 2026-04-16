@@ -1,1 +1,0 @@
-<?= view('components/register_form') ?>
