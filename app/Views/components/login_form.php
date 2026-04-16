@@ -1,32 +1,43 @@
-<?php $errors = session()->getFlashdata('errors') ?? []; ?>
-<form method="post" action="<?= base_url('login') ?>">
+<?php 
+$validation = session('validation');
+$emailError = $validation ? $validation->getError('email') : null;
+$passwordError = $validation ? $validation->getError('password') : null;
+?>
 
-    <input type="email" name="email" placeholder="Correo Electrónico" value="<?= old('email') ?>" 
+<?php if (session()->getFlashdata('error_login') && !$emailError && !$passwordError): ?>
+    <div style="color:red; margin-bottom:10px;">
+        <?= session()->getFlashdata('error_login') ?>
+    </div>
+<?php endif; ?>
+<form method="post" action="<?= site_url('login') ?>">
+    <?= csrf_field() ?>
+
+    <input type="text" name="email" placeholder="Correo Electrónico" value="<?= old('email') ?>" 
 
            style="width:100%;
             padding:12px;
-            margin-bottom:12px;
+            margin-bottom:5px;
             border-radius:8px;
             border:1px solid #ccc;
             box-sizing:border-box;">
-            <?php if (isset($errors['email'])): ?>
-            <div style="color:red; font-size:12px;">
-                <?= $errors['email'] ?>
-            </div>
-        <?php endif; ?>
+           <?php if ($validation && $validation->getError('email')): ?>
+    <div style="color:red; font-size:12px;">
+        <?= $validation->getError('email') ?>
+    </div>
+<?php endif; ?>
 
     <input type="password" name="password" placeholder="Contraseña"
            style="width:100%;
             padding:12px;
-            margin-bottom:12px;
+            margin-bottom:5px;
             border-radius:8px;
             border:1px solid #ccc;
             box-sizing:border-box;">
-            <?php if (isset($errors['password'])): ?>
-            <div style="color:red; font-size:12px;">
-                <?= $errors['password'] ?>
-            </div>
-        <?php endif; ?>
+           <?php if ($validation && $validation->getError('password')): ?>
+    <div style="color:red; font-size:12px;">
+        <?= $validation->getError('password') ?>
+    </div>
+<?php endif; ?>
 
     <button type="submit" style="
             width:100%;

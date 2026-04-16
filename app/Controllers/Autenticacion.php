@@ -45,27 +45,34 @@ class Autenticacion extends BaseController
     if (!$this->validate($rules)) {
     return redirect()->back()
         ->withInput()
-        ->with('errors', $this->validator->getErrors());
+        ->with('errors', $this->validator->getErrors())
+        ->with('modal', 'registro');
 }
 
     $model = new UsuarioModel();
 
-    $model->save([
-        'nombre' => $this->request->getPost('nombre'),
-        'email' => $this->request->getPost('email'),
-        'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
-        'rol_editor' => in_array('editor', $this->request->getPost('rol') ?? []) ? 1 : 0,
-        'rol_validador' => in_array('validador', $this->request->getPost('rol') ?? []) ? 1 : 0
-    ]);
+    // Guardar usuario
+        $id = $model->insert([
+            'nombre' => $this->request->getPost('nombre'),
+            'email' => $this->request->getPost('email'),
+            'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
+            'rol_editor' => in_array('editor', $this->request->getPost('rol') ?? []) ? 1 : 0,
+            'rol_validador' => in_array('validador', $this->request->getPost('rol') ?? []) ? 1 : 0
+        ]);
 
-    // login automático
-    $usuario = $model->where('email', $this->request->getPost('email'))->first();
+        $usuario = $model->find($id);
 
-    session()->set([
-        'id' => $usuario['id'],
-        'nombre' => $usuario['nombre'],
-        'logueado' => true
-    ]);
+        // 🔐 Seguridad: regenerar sesión
+        session()->regenerate();
+
+        // Login automático
+        session()->set([
+            'id' => $usuario['id'],
+            'nombre' => $usuario['nombre'],
+            'rol_editor' => $usuario['rol_editor'],
+            'rol_validador' => $usuario['rol_validador'],
+            'logueado' => true
+        ]);
 
     return redirect()->to('/');
 }
@@ -75,46 +82,63 @@ class Autenticacion extends BaseController
     {
          $rules = [
         'email' => [
-            'rules' => 'required|valid_email',
+            'rules' => 'required|valid_email|is_not_unique[usuarios.email]',
             'errors' => [
                 'required' => 'El email es obligatorio',
-                'valid_email' => 'Ingresá un email válido'
+                'valid_email' => 'Ingresá un email válido',
+                'is_not_unique' => 'El email no está registrado'
             ]
         ],
         'password' => [
-            'rules' => 'required',
-            'errors' => [
-                'required' => 'La contraseña es obligatoria'
-            ]
+        'rules' => 'required|min_length[6]',
+        'errors' => [
+            'required' => 'La contraseña es obligatoria',
+            'min_length' => 'La contraseña debe tener al menos 6 caracteres'
         ]
+    ],
     ];
-    // ❌ errores de validación (inputs vacíos, etc)
+    //  errores de validación (inputs vacíos, etc)
     if (!$this->validate($rules)) {
         return redirect()->back()
             ->withInput()
-            ->with('errors', $this->validator->getErrors());
+            //->with('errors', $this->validator->getErrors())
+            ->with('validation', $this->validator) 
+            ->with('modal', 'login');
     }
 
         $model = new UsuarioModel();
 
-        $email = $this->request->getPost('email');
-        $password = $this->request->getPost('password');
+        $email = trim($this->request->getPost('email'));
+        $password = trim($this->request->getPost('password'));
+
+        if ($email === '' || $password === '') {
+        return redirect()->back()
+            ->withInput()
+            ->with('validation', $this->validator)
+            ->with('modal', 'login');
+}
 
         $usuario = $model->where('email', $email)->first();
-
-        // ❌ email no existe
+    
+        //  email no existe
         if (!$usuario) {
             return redirect()->back()
-                ->withInput()
-                ->with('error_login', 'El email no está registrado');
+               ->withInput()
+               ->with('error_login', 'El email no está registrado')
+               ->with('modal', 'login');
+                
         }
 
-        // ❌ contraseña incorrecta
-        if (!password_verify($password, $usuario['password'])) {
-            return redirect()->back()
+        if (!$this->validator->getErrors() &&
+           !password_verify($password, $usuario['password'])
+        ) {
+           return redirect()->back()
                 ->withInput()
-                ->with('error_login', 'Contraseña incorrecta');
+               ->with('error_login', 'Contraseña incorrecta')
+                ->with('modal', 'login');
         }
+
+        session()->regenerate();
 
         // ✅ login correcto
         session()->set([
@@ -124,7 +148,8 @@ class Autenticacion extends BaseController
             'rol_validador' => $usuario['rol_validador'],
             'logueado' => true
         ]);
-
+        
+       
             return redirect()->to('/noticias');
         }
 

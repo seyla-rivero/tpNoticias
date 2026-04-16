@@ -194,13 +194,23 @@
     </div>
 
 </div>
-<?php if (session()->getFlashdata('errors')): ?>
+<?php $modal = session()->getFlashdata('modal'); ?>
+
 <script>
-    window.onload = function() {
+document.addEventListener("DOMContentLoaded", function() {
+
+    let modal = "<?= $modal ?>";
+
+    if (modal === 'login') {
+        document.getElementById("loginFormModal").style.display = "flex";
+    }
+
+    if (modal === 'registro') {
         document.getElementById("registroModal").style.display = "flex";
     }
+
+});
 </script>
-<?php endif; ?>
 </body>
 </html>
 
