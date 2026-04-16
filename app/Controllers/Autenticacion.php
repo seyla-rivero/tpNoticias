@@ -56,8 +56,8 @@ class Autenticacion extends BaseController
             'nombre' => $this->request->getPost('nombre'),
             'email' => $this->request->getPost('email'),
             'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
-            'rol_editor' => in_array('editor', $this->request->getPost('rol') ?? []) ? 1 : 0,
-            'rol_validador' => in_array('validador', $this->request->getPost('rol') ?? []) ? 1 : 0
+            'rol_editor' => $this->request->getPost('rol_editor') ? 1 : 0,
+            'rol_validador' => $this->request->getPost('rol_validador') ? 1 : 0
         ]);
 
         $usuario = $model->find($id);

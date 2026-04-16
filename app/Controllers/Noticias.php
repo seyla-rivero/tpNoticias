@@ -60,7 +60,20 @@ class Noticias extends BaseController
         ]);
     }
 
-    $estado = ($accion == 'validar') ? 'Lista para Validación' : 'Borrador';
+    switch ($accion) {
+        case 'validar':
+            $estado = 'Lista para Validación';
+            break;
+
+        case 'anular':
+            $estado = 'Anulada';
+            break;
+
+        case 'guardar':
+        default:
+            $estado = 'Borrador';
+            break;
+    }
 
     // 🔹 Manejo de imagen
     $imagen = $this->request->getFile('imagen');
@@ -77,9 +90,24 @@ class Noticias extends BaseController
         'descripcion' => $this->request->getPost('descripcion'),
         'estado' => $estado,
         'imagen' => $nombreImagen,
-        'autor_id' => 1
+        'autor_id' => session()->get('id')
     ]);
 
     return redirect()->to('/noticias');
 }
+    public function cambiarEstado($id)
+    {
+        $accion = $this->request->getPost('accion');
+
+        if ($accion == 'validar') {
+            $estado = 'Lista para Validación';
+        } elseif ($accion == 'anular') {
+            $estado = 'Anulada';
+        }
+
+        $model = new NoticiaModel();
+        $model->update($id, ['estado' => $estado]);
+
+        return redirect()->back();
+    }
 }

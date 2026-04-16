@@ -92,19 +92,80 @@
             </div>
 
             <!-- BOTON -->
-            <div style="width:120px; text-align:right;">
-                <a href="/noticias/ver/<?= $noticia['id'] ?>" style="
-                    background:#5c6bc0;
-                    color:white;
-                    padding:8px 12px;
-                    border-radius:8px;
-                    text-decoration:none;
-                    font-size:13px;
-                ">
-                    Ver detalle
-                </a>
-            </div>
+            <div style="width:220px; text-align:right; display:flex; gap:5px; justify-content:flex-end;">
 
+    <?php if ($noticia['estado'] == 'Borrador'): ?>
+
+        <a href="/noticias/editar/<?= $noticia['id'] ?>" style="
+            background:#ffa726;
+            color:white;
+            padding:6px 10px;
+            border-radius:8px;
+            text-decoration:none;
+            font-size:12px;
+        ">Editar</a>
+
+        <form method="post" action="/noticias/cambiarEstado/<?= $noticia['id'] ?>">
+            <button name="accion" value="validar" style="
+                background:#42a5f5;
+                color:white;
+                padding:6px 10px;
+                border:none;
+                border-radius:8px;
+                font-size:12px;
+                cursor:pointer;
+            ">Enviar a Validación</button>
+        </form>
+
+        <form method="post" action="/noticias/cambiarEstado/<?= $noticia['id'] ?>">
+            <button name="accion" value="anular" style="
+                background:#ef5350;
+                color:white;
+                padding:6px 10px;
+                border:none;
+                border-radius:8px;
+                font-size:12px;
+                cursor:pointer;
+            ">Anular</button>
+        </form>
+
+    <?php elseif ($noticia['estado'] == 'Para Corrección'): ?>
+
+        <a href="/noticias/editar/<?= $noticia['id'] ?>" style="
+            background:#ffa726;
+            color:white;
+            padding:6px 10px;
+            border-radius:8px;
+            text-decoration:none;
+            font-size:12px;
+        ">Editar</a>
+            <!-- REENVIAR A VALIDACIÓN -->
+        <form method="post" action="/noticias/cambiarEstado/<?= $noticia['id'] ?>">
+            <button name="accion" value="validar" style="
+                background:#42a5f5;
+                color:white;
+                padding:6px 10px;
+                border:none;
+                border-radius:8px;
+                font-size:12px;
+                cursor:pointer;
+            ">Reenviar</button>
+        </form>
+
+    <?php else: ?>
+
+        <a href="/noticias/ver/<?= $noticia['id'] ?>" style="
+            background:#5c6bc0;
+            color:white;
+            padding:6px 10px;
+            border-radius:8px;
+            text-decoration:none;
+            font-size:12px;
+        ">Ver</a>
+
+    <?php endif; ?>
+
+</div>
         </div>
 
     <?php endforeach; ?>

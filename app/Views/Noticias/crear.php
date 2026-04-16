@@ -88,8 +88,8 @@
                     Enviar a validación
                     </button>
 
-                    <button class="btn btn-anular" type="submit" value="anular">
-                    Anular
+                    <button class="btn btn-anular" type="submit" name="accion "value="anular">
+                    Cancelar
                     </button>
                 </div>
 
