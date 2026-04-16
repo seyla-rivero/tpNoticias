@@ -49,7 +49,7 @@ class Noticias extends BaseController
     $accion = $this->request->getPost('accion');
     $titulo = trim($this->request->getPost('titulo'));
 
-    // 🔥 VALIDACIÓN DE DUPLICADO (ACÁ VA)
+    //  VALIDACIÓN DE DUPLICADO (ACÁ VA)
     $existe = $model->where('titulo', $titulo)
                     ->where('estado', 'Publicada')
                     ->first();

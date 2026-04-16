@@ -55,4 +55,11 @@ class Validation extends BaseConfig
         'rules' => 'if_exist|max_size[imagen,2048]|is_image[imagen]|mime_in[imagen,image/jpg,image/jpeg,image/png]'
     ],
     ];
+
+    public array $registro = [
+    'nombre' => 'required|min_length[3]',
+    'email'  => 'required|valid_email|is_unique[usuarios.email]',
+    'password' => 'required|min_length[6]',
+    'confirmar' => 'required|matches[password]'
+];
 }

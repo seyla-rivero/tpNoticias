@@ -16,23 +16,23 @@
     </div>
 
    <div id="loginModal" style="
-    display:none;
-    position:fixed;
-    top:65px;
-    left:0;
-    width:100%;
-    height:calc(100% - 65px);
-    background:#2F4A8A;
-    justify-content:center;
-    align-items:center;
-    z-index:3000;
+        display:none;
+        position:fixed;
+        top:65px;
+        left:0;
+        width:100%;
+        height:calc(100% - 65px);
+        background:rgba(0,0,0,0.5);
+        justify-content:center;
+        align-items:center;
+        z-index:3000;
 ">
 
     <div style="
-        background:#e6e6e6;
-        padding:40px 30px;
-        border-radius:15px;
-        width:380px;
+        background:#f2f2f2;
+        padding:35px 30px;
+        border-radius:18px;
+        width:400px;
         text-align:center;
         border:3px solid #3bb3ff;
         box-shadow:0 10px 25px rgba(0,0,0,0.2);
@@ -42,17 +42,20 @@
         <!-- CERRAR -->
         <span onclick="cerrarLogin()" style="
             position:absolute;
-            top:10px;
-            right:15px;
+            top:15px;
+            right:18px;
             cursor:pointer;
-            font-size:18px;
+            font-size:20px;
+            font-weight:bold;
         ">✖</span>
 
         <!-- LOGO -->
         <img src="/app_tp1/public/img/logo-noticias.png"
-             style="width:80px; margin-bottom:15px;">
+             style="width:70px; margin-bottom:10px;">
 
-        <h2 style="margin-bottom:25px;">
+        <h2 style="margin-bottom:25px;
+            font-weight:bold;
+            letter-spacing:1px;">
             GESTIÓN DE NOTICIAS
         </h2>
 
@@ -99,30 +102,37 @@
     left:0;
     width:100%;
     height:calc(100% - 65px);
-    background:#2F4A8A;
+    background:rgba(0,0,0,0.5);
     justify-content:center;
     align-items:center;
     z-index:3000;
 ">
 
     <div style="
-        background:#e6e6e6;
-        padding:40px 30px;
-        border-radius:15px;
-        width:380px;
+        background:#f2f2f2;
+        padding:35px 30px;
+        border-radius:18px;
+        width:400px;
         text-align:center;
         border:3px solid #3bb3ff;
         box-shadow:0 10px 25px rgba(0,0,0,0.2);
         position:relative;
     ">
 
-        <span onclick="cerrarLoginForm()" style="float:right; cursor:pointer;">✖</span>
+        <span onclick="cerrarLoginForm()" style=" position:absolute;
+            top:15px;
+            right:18px;
+            cursor:pointer;
+            font-size:20px;
+            font-weight:bold;">✖</span>
 
         <!-- LOGO -->
         <img src="/app_tp1/public/img/logo-noticias.png"
-             style="width:80px; margin-bottom:15px;">
+             style="width:70px; margin-bottom:10px;">
 
-        <h2 style="margin-bottom:25px;">
+        <h2 style=" margin-bottom:25px;
+            font-weight:bold;
+            letter-spacing:1px;">
             GESTIÓN DE NOTICIAS
         </h2>
 
@@ -184,6 +194,13 @@
     </div>
 
 </div>
+<?php if (session()->getFlashdata('errors')): ?>
+<script>
+    window.onload = function() {
+        document.getElementById("registroModal").style.display = "flex";
+    }
+</script>
+<?php endif; ?>
 </body>
 </html>
 
