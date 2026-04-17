@@ -64,7 +64,7 @@
 
             <span>📅 Creada: <?= date('d/m/Y', strtotime($noticia['fecha_creacion'])) ?></span>
 
-            <?php if ($noticia['estado'] == 'Publicado'): ?>
+            <?php if ($noticia['estado'] == 'Publicada'): ?>
 
             <span>
                 📅 Publicada: 
@@ -108,7 +108,15 @@
         <div style="display:flex; justify-content:space-between; align-items:center;">
 
             <!-- VOLVER -->
-            <a href="<?= base_url('noticias') ?>" 
+            <?php
+            $urlVolver = 'noticias';
+
+            if (session()->get('rol_validador')) {
+                $urlVolver = 'noticias/pendientes';
+            }
+            ?>
+
+            <a href="<?= base_url($urlVolver) ?>" 
             style="text-decoration:none; color:black;">
                 ← Volver
             </a>
@@ -153,17 +161,17 @@
 
                     <?php if (session()->get('rol_validador')): ?>
 
-                        <form method="post" action="/noticias/cambiarEstado/<?= $noticia['id'] ?>">
-                            <button class="btn btn-verde" name="accion" value="publicar">
+                        <form method="post" action="<?= base_url('noticias/cambiarEstado/' . $noticia['id']) ?>">
+                        <button class="btn btn-verde" name="accion" value="publicar">
                                 Publicar
                             </button>
                         </form>
 
-                        <form method="post" action="/noticias/cambiarEstado/<?= $noticia['id'] ?>">
-                           <button class="btn btn-naranja" name="accion" value="correcion">
-                        Para Correción
+                        <form method="post" action="<?= base_url('noticias/cambiarEstado/' . $noticia['id']) ?>">
+                           <button class="btn btn-naranja" name="accion" value="correccion">
+                        Para Corrección
                     </button>
-                        </form>
+                </form>
 
                     <?php endif; ?>
 

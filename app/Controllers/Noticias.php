@@ -126,32 +126,23 @@ class Noticias extends BaseController
         return redirect()->back()->with('error', 'No se puede modificar esta noticia');
     }
 
-    $rolEditor = session()->get('rol_editor');
-    $rolValidador = session()->get('rol_validador');
-
     $data = [];
 
     switch ($accion) {
 
         // 🟡 SOLO EDITOR
         case 'validar':
-            //if (!$rolEditor) return redirect()->back();
-            //$data['estado'] = 'Lista para Validación';
-            //break;
             if (!$rolEditor) {
                 return redirect()->back()->with('error', 'No tenés permisos');
             }
 
-            if ($noticia['estado'] != 'Borrador') {
+            if (!in_array($noticia['estado'], ['Borrador', 'Para Corrección'])) {
                 return redirect()->back()->with('error', 'Estado inválido');
             }
 
             $data['estado'] = 'Lista para Validación';
             break;
         case 'anular':
-             //f (!$rolEditor) return redirect()->back();
-            //$data['estado'] = 'Anulada';
-            //break;
             if (!$rolEditor) {
                 return redirect()->back()->with('error', 'No tenés permisos');
             }
@@ -165,29 +156,21 @@ class Noticias extends BaseController
 
         // 🔵 SOLO VALIDADOR
         case 'publicar':
-           // if (!$rolValidador) return redirect()->back();
-            //if ($noticia['estado'] != 'Lista para Validación') {
-                //return redirect()->back();
-            //}
-            //$data['estado'] = 'Publicada';
-            //$data['fecha_publicacion'] = date('Y-m-d H:i:s');
-            //break;
             if (!$rolValidador) {
-                return redirect()->back();
-            }
+            return redirect()->back();
+        }
 
-            if ($noticia['estado'] != 'Lista para Validación') {
-                return redirect()->back()->with('error', 'No se puede publicar en este estado');
-            }
+        if ($noticia['estado'] != 'Lista para Validación') {
+            return redirect()->back()->with('error', 'No se puede publicar en este estado');
+        }
 
-            $data['estado'] = 'Publicada';
-            $data['fecha_publicacion'] = date('Y-m-d H:i:s');
-            break;
-        case 'corregir':
-         
-            //if (!$rolValidador) return redirect()->back();
-            //$data['estado'] = 'Para Corrección';
-           // break;
+        $data['estado'] = 'Publicada';
+        $data['fecha_publicacion'] = date('Y-m-d H:i:s');
+
+        $model->update($id, $data);
+
+        return redirect()->to(base_url('noticias/pendientes'));
+        case 'correccion':
             if (!$rolValidador) {
                 return redirect()->back();
             }
@@ -197,10 +180,13 @@ class Noticias extends BaseController
             }
 
             $data['estado'] = 'Para Corrección';
-            break;
+
+            $model->update($id, $data);
+
+            return redirect()->to(base_url('noticias/pendientes'));
 
         default:
-            //return redirect()->back();
+           
             return redirect()->to(base_url('noticias'));
     }
 

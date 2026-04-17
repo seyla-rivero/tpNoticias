@@ -69,7 +69,7 @@
                         case 'Borrador': $color = "#fff3cd"; break;
                         case 'Lista para Validación': $color = "#dbeafe"; break;
                         case 'Publicada': $color = "#c8e6c9"; break;
-                        case 'Para Corrección': $color = "#f8d7da"; break;
+                        case 'Para Corrección': $color = "#f0a05e"; break;
                         case 'Anulada': $color = "#f5c6cb"; break;
                         case 'Expirada': $color = "#d6d8db"; break;
                     }
@@ -123,25 +123,17 @@
 
     <?php elseif ($noticia['estado'] == 'Para Corrección'): ?>
 
-        <a href="/noticias/editar/<?= $noticia['id'] ?>" style="
-            background:#ffa726;
-            color:white;
-            padding:6px 10px;
-            border-radius:8px;
-            text-decoration:none;
-            font-size:12px;
-        ">Editar</a>
+         <form method="post" action="<?= base_url('noticias/editar/' . $noticia['id']) ?>">
+            <button class="btn btn-gris" name="accion" value="editar">
+                Editar
+            </button>
+        </form>   
             <!-- REENVIAR A VALIDACIÓN -->
-        <form method="post" action="/noticias/cambiarEstado/<?= $noticia['id'] ?>">
-            <button name="accion" value="validar" style="
-                background:#42a5f5;
-                color:white;
-                padding:6px 10px;
-                border:none;
-                border-radius:8px;
-                font-size:12px;
-                cursor:pointer;
-            ">Reenviar</button>
+        <form method="post" action="<?= base_url('noticias/cambiarEstado/' . $noticia['id']) ?>">
+            <button class="btn btn-azul" name="accion" value="validar">
+                Reenviar para Validación
+            </button>
+
         </form>
 
     <?php else: ?>

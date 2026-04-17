@@ -70,30 +70,23 @@
 
             <?php if (session()->get('rol_validador')): ?>
 
+                <form method="post" action="<?= base_url('noticias/detalle/' .  $noticia['id']) ?>"> <button class="btn btn-azuloscuro" name="accion" value="ver">
+                        Ver detalle
+                    </button>
+                </form>  
+
                 <!-- PUBLICAR -->
-                <form method="post" action="/noticias/cambiarEstado/<?= $noticia['id'] ?>">
-                    <button name="accion" value="publicar" style="
-                        background:#66bb6a;
-                        color:white;
-                        padding:6px 10px;
-                        border:none;
-                        border-radius:8px;
-                        font-size:12px;
-                        cursor:pointer;
-                    ">Publicar</button>
-                </form>
+                <form method="post" action="<?= base_url('noticias/cambiarEstado/' . $noticia['id']) ?>">
+                    <button class="btn btn-verde" name="accion" value="publicar">
+                                Publicar
+                            </button>
+                        </form>
 
                 <!-- CORREGIR -->
-                <form method="post" action="/noticias/cambiarEstado/<?= $noticia['id'] ?>">
-                    <button name="accion" value="corregir" style="
-                        background:#ffa726;
-                        color:white;
-                        padding:6px 10px;
-                        border:none;
-                        border-radius:8px;
-                        font-size:12px;
-                        cursor:pointer;
-                    ">Para Corregir</button>
+                <form method="post" action="<?= base_url('noticias/cambiarEstado/' . $noticia['id']) ?>">
+                           <button class="btn btn-naranja" name="accion" value="correccion">
+                        Para Corrección
+                    </button>
                 </form>
 
                 <?php else: ?>
