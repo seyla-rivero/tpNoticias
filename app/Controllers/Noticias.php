@@ -37,7 +37,7 @@ class Noticias extends BaseController
         return view('Noticias/crear');
     }
 
-    public function guardar()
+    public function guardar($id = null)
 {
     if (!$this->validate('noticia')) {
         return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
@@ -45,22 +45,21 @@ class Noticias extends BaseController
 
     $model = new NoticiaModel();
 
-    // 🔹 Detectar qué botón se presionó
     $accion = $this->request->getPost('accion');
     $titulo = trim($this->request->getPost('titulo'));
 
-    //  VALIDACIÓN DE DUPLICADO (ACÁ VA)
+    // 🔹 Validación duplicado
     $existePublicada = $model->where('titulo', $titulo)
                              ->where('estado', 'Publicada')
-                            ->first();
+                             ->first();
 
     if ($existePublicada && in_array($accion, ['validar'])) {
         return redirect()->back()->withInput()->with('errors', [
             'titulo' => 'Ya existe una noticia publicada con este título.'
         ]);
     }
-    
 
+    // 🔹 Estado
     switch ($accion) {
         case 'validar':
             $estado = 'Lista para Validación';
@@ -70,29 +69,41 @@ class Noticias extends BaseController
             $estado = 'Anulada';
             break;
 
-        case 'guardar':
         default:
             $estado = 'Borrador';
             break;
     }
 
-    // 🔹 Manejo de imagen
+    // 🔹 Buscar noticia actual (si es edición)
+    $noticiaActual = null;
+    if ($id) {
+        $noticiaActual = $model->find($id);
+    }
+
+    // 🔹 Imagen
     $imagen = $this->request->getFile('imagen');
-    $nombreImagen = null;
+    $nombreImagen = $noticiaActual['imagen'] ?? null;
 
     if ($imagen && $imagen->isValid() && !$imagen->hasMoved()) {
         $nombreImagen = $imagen->getRandomName();
         $imagen->move('uploads/', $nombreImagen);
     }
 
-    // 🔹 Guardar en BD
-    $model->save([
+    // 🔹 Datos
+    $data = [
         'titulo' => $titulo,
         'descripcion' => $this->request->getPost('descripcion'),
         'estado' => $estado,
         'imagen' => $nombreImagen,
         'autor_id' => session()->get('id')
-    ]);
+    ];
+
+    // 🔹 Si hay ID → actualizar
+    if ($id) {
+        $data['id'] = $id;
+    }
+
+    $model->save($data);
 
     return redirect()->to('/noticias');
 }
@@ -220,5 +231,17 @@ class Noticias extends BaseController
         }
 
         return view('Noticias/detalle', ['noticia' => $noticia]);
+    }
+    public function editar($id)
+    {
+        $model = new NoticiaModel();
+        $noticia = $model->find($id);
+
+        if (in_array($noticia['estado'], ['Publicada', 'Expirada'])) {
+            return redirect()->to('/noticias')
+                ->with('error', 'No se puede editar esta noticia');
+        }
+
+        return view('Noticias/editar', ['noticia' => $noticia]);
     }
 }

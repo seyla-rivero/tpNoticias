@@ -16,3 +16,6 @@ $routes->get('noticias/pendientes', 'Noticias::pendientes');
 $routes->get('noticias/detalle/(:num)', 'Noticias::detalle/$1');
 $routes->post('noticias/cambiarEstado/(:num)', 'Noticias::cambiarEstado/$1');
 $routes->post('noticias/detalle/(:num)', 'Noticias::detalle/$1');
+$routes->get('noticias/editar/(:num)', 'Noticias::editar/$1');
+$routes->post('noticias/editar/(:num)', 'Noticias::editar/$1');
+$routes->post('noticias/guardar/(:num)', 'Noticias::guardar/$1');

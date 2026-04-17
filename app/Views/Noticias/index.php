@@ -102,7 +102,7 @@
             </button>
         </form>  
 
-        <form method="post" action="<?= base_url('noticias/cambiarEstado/' . $noticia['id']) ?>">
+        <form method="post" action="<?= base_url('noticias/editar/' . $noticia['id']) ?>">
             <button class="btn btn-gris" name="accion" value="editar">
                 Editar
             </button>
