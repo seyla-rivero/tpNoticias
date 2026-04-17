@@ -13,7 +13,7 @@ class Noticias extends BaseController
     $buscar = $this->request->getGet('buscar');
     $estado = $this->request->getGet('estado');
 
-    // 👇 SOLO si está logueado filtrás por usuario
+    //  SOLO si está logueado filtrás por usuario
     if (session()->get('logueado')) {
         $usuario_id = session()->get('id');
         $model = $model->where('autor_id', $usuario_id);
@@ -96,18 +96,87 @@ class Noticias extends BaseController
     return redirect()->to('/noticias');
 }
     public function cambiarEstado($id)
-    {
-        $accion = $this->request->getPost('accion');
+{
+    $accion = $this->request->getPost('accion');
 
-        if ($accion == 'validar') {
-            $estado = 'Lista para Validación';
-        } elseif ($accion == 'anular') {
-            $estado = 'Anulada';
+    $model = new NoticiaModel();
+    $noticia = $model->find($id);
+
+    $rolEditor = session()->get('rol_editor');
+    $rolValidador = session()->get('rol_validador');
+
+    if (!$noticia) {
+        return redirect()->back();
+    }
+
+    // 🚫 No modificar si está cerrada
+    if (in_array($noticia['estado'], ['Publicada', 'Expirada'])) {
+        return redirect()->back()->with('error', 'No se puede modificar esta noticia');
+    }
+
+    $rolEditor = session()->get('rol_editor');
+    $rolValidador = session()->get('rol_validador');
+
+    $data = [];
+
+    switch ($accion) {
+
+        // 🟡 SOLO EDITOR
+        case 'validar':
+            if (!$rolEditor) return redirect()->back();
+            $data['estado'] = 'Lista para Validación';
+            break;
+        case 'anular':
+             if (!$rolEditor) return redirect()->back();
+            $data['estado'] = 'Anulada';
+            break;
+
+        // 🔵 SOLO VALIDADOR
+        case 'publicar':
+            if (!$rolValidador) return redirect()->back();
+            if ($noticia['estado'] != 'Lista para Validación') {
+                return redirect()->back();
+            }
+            $data['estado'] = 'Publicada';
+            $data['fecha_publicacion'] = date('Y-m-d H:i:s');
+            break;
+        case 'corregir':
+         
+             if (!$rolValidador) return redirect()->back();
+            $data['estado'] = 'Para Corrección';
+            break;
+
+        default:
+            //return redirect()->back();
+            return redirect()->to(base_url('noticias'));
+    }
+
+    $model->update($id, $data);
+
+    return redirect()->back();
+}
+
+        public function pendientes()
+    {
+        $model = new NoticiaModel();
+
+        $data['noticias'] = $model
+            ->where('estado', 'Lista para Validación')
+            ->findAll();
+
+        return view('noticias/listaValidador', $data);
+    }
+
+        public function detalle($id)
+    {
+        $model = new NoticiaModel();
+
+        $noticia = $model->find($id);
+
+        if (!$noticia) {
+            return redirect()->to('/noticias');
         }
 
-        $model = new NoticiaModel();
-        $model->update($id, ['estado' => $estado]);
-
-        return redirect()->back();
+        return view('Noticias/detalle', ['noticia' => $noticia]);
     }
 }

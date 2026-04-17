@@ -103,7 +103,7 @@
 
 </div>
 
-    <!-- MENÚ DESPLEGABLE -->
+    <!-- MENÚ DESPLEGABLE 
     <div id="userMenu" style="
         display: none;
         position: absolute;
@@ -117,7 +117,7 @@
         min-width: 150px;
         z-index: 2000;
     ">
-    </div>
+    </div> -->
 
 </div>
 
@@ -139,17 +139,36 @@
 
     <h2>Menú</h2>
 
-    <a href="/app_tp1/public/noticias" style="display:block; color:white; margin:12px 0; text-decoration:none;">
-    📰 Mis Noticias
-    </a>
+   <?php if (session()->get('logueado')): ?>
 
-    <a href="/app_tp1/public/noticias/crear" style="display:block; color:white; margin:12px 0; text-decoration:none;">
-    ➕ Crear Noticia
-    </a>
+    <?php if (session()->get('rol_editor')): ?>
 
+        <a href="/app_tp1/public/noticias" style="display:block; color:white; margin:12px 0; text-decoration:none;">
+        📰 Mis Noticias
+        </a>
+
+        <a href="/app_tp1/public/noticias/crear" style="display:block; color:white; margin:12px 0; text-decoration:none;">
+        ➕ Crear Noticia
+        </a>
+
+    <?php endif; ?>
+
+
+    <?php if (session()->get('rol_validador')): ?>
+
+        <a href="/app_tp1/public/noticias/pendientes" style="display:block; color:white; margin:12px 0; text-decoration:none;">
+        ✔ Noticias para validar
+        </a>
+
+    <?php endif; ?>
+
+
+    <!-- CONFIGURACIÓN (para todos) -->
     <a href="#" style="display:block; color:white; margin:12px 0; text-decoration:none;">
     ⚙ Configuración
     </a>
+
+<?php endif; ?>
 
 </div>
 

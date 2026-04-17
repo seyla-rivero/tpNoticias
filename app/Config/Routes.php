@@ -12,3 +12,6 @@ $routes->post('/noticias/guardar', 'Noticias::guardar');
 $routes->post('/registro', 'Autenticacion::guardar');
 $routes->post('/login', 'Autenticacion::validar');
 $routes->get('/logout', 'Autenticacion::logout');
+$routes->get('noticias/pendientes', 'Noticias::pendientes');
+$routes->get('noticias/detalle/(:num)', 'Noticias::detalle/$1');
+$routes->post('noticias/cambiarEstado/(:num)', 'Noticias::cambiarEstado/$1');

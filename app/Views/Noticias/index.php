@@ -52,7 +52,7 @@
             margin-bottom:10px;
             border-radius:10px;
             display:flex;
-            align-items:center;
+            align-items:center; 
         ">
 
             <!-- TITULO -->
@@ -92,9 +92,19 @@
             </div>
 
             <!-- BOTON -->
-            <div style="width:220px; text-align:right; display:flex; gap:5px; justify-content:flex-end;">
+        <div style="flex:1; display:flex; gap:8px; justify-content:flex-end;">
+    <?php if (session()->get('rol_editor')): ?>
 
     <?php if ($noticia['estado'] == 'Borrador'): ?>
+
+         <a href="<?= base_url('noticias/detalle/' .  $noticia['id']) ?>" style="
+            background:#5c6bc0;
+            color:white;
+            padding:6px 10px;
+            border-radius:8px;
+            text-decoration:none;
+            font-size:12px;
+        ">Ver</a>
 
         <a href="/noticias/editar/<?= $noticia['id'] ?>" style="
             background:#ffa726;
@@ -154,7 +164,7 @@
 
     <?php else: ?>
 
-        <a href="/noticias/ver/<?= $noticia['id'] ?>" style="
+        <a href="<?= base_url('noticias/detalle/' .  $noticia['id']) ?>" style="
             background:#5c6bc0;
             color:white;
             padding:6px 10px;
@@ -164,6 +174,17 @@
         ">Ver</a>
 
     <?php endif; ?>
+    <?php else: ?>
+
+    <!-- Si NO es editor, solo puede ver -->
+    <a href="/noticias/ver/<?= $noticia['id'] ?>" style="background:#5c6bc0;
+            color:white;
+            padding:6px 10px;
+            border-radius:8px;
+            text-decoration:none;
+            font-size:12px;">Ver</a>
+
+<?php endif; ?>
 
 </div>
         </div>
