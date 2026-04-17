@@ -50,15 +50,16 @@ class Noticias extends BaseController
     $titulo = trim($this->request->getPost('titulo'));
 
     //  VALIDACIÓN DE DUPLICADO (ACÁ VA)
-    $existe = $model->where('titulo', $titulo)
-                    ->where('estado', 'Publicada')
-                    ->first();
+    $existePublicada = $model->where('titulo', $titulo)
+                             ->where('estado', 'Publicada')
+                            ->first();
 
-    if ($existe && $accion == 'validar') {
+    if ($existePublicada && in_array($accion, ['validar'])) {
         return redirect()->back()->withInput()->with('errors', [
             'titulo' => 'Ya existe una noticia publicada con este título.'
         ]);
     }
+    
 
     switch ($accion) {
         case 'validar':
@@ -123,26 +124,67 @@ class Noticias extends BaseController
 
         // 🟡 SOLO EDITOR
         case 'validar':
-            if (!$rolEditor) return redirect()->back();
+            //if (!$rolEditor) return redirect()->back();
+            //$data['estado'] = 'Lista para Validación';
+            //break;
+            if (!$rolEditor) {
+                return redirect()->back()->with('error', 'No tenés permisos');
+            }
+
+            if ($noticia['estado'] != 'Borrador') {
+                return redirect()->back()->with('error', 'Estado inválido');
+            }
+
             $data['estado'] = 'Lista para Validación';
             break;
         case 'anular':
-             if (!$rolEditor) return redirect()->back();
+             //f (!$rolEditor) return redirect()->back();
+            //$data['estado'] = 'Anulada';
+            //break;
+            if (!$rolEditor) {
+                return redirect()->back()->with('error', 'No tenés permisos');
+            }
+
+            if ($noticia['estado'] != 'Borrador') {
+                return redirect()->back()->with('error', 'Solo se puede anular desde Borrador');
+            }
+
             $data['estado'] = 'Anulada';
             break;
 
         // 🔵 SOLO VALIDADOR
         case 'publicar':
-            if (!$rolValidador) return redirect()->back();
-            if ($noticia['estado'] != 'Lista para Validación') {
+           // if (!$rolValidador) return redirect()->back();
+            //if ($noticia['estado'] != 'Lista para Validación') {
+                //return redirect()->back();
+            //}
+            //$data['estado'] = 'Publicada';
+            //$data['fecha_publicacion'] = date('Y-m-d H:i:s');
+            //break;
+            if (!$rolValidador) {
                 return redirect()->back();
             }
+
+            if ($noticia['estado'] != 'Lista para Validación') {
+                return redirect()->back()->with('error', 'No se puede publicar en este estado');
+            }
+
             $data['estado'] = 'Publicada';
             $data['fecha_publicacion'] = date('Y-m-d H:i:s');
             break;
         case 'corregir':
          
-             if (!$rolValidador) return redirect()->back();
+            //if (!$rolValidador) return redirect()->back();
+            //$data['estado'] = 'Para Corrección';
+           // break;
+            if (!$rolValidador) {
+                return redirect()->back();
+            }
+
+            if ($noticia['estado'] != 'Lista para Validación') {
+                return redirect()->back();
+            }
+
             $data['estado'] = 'Para Corrección';
             break;
 
