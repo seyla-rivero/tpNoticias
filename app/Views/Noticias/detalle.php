@@ -17,7 +17,7 @@
                 <?= $noticia['titulo'] ?>
             </h2>
 
-            <a href="#" style="color:#3b82f6; text-decoration:none; font-weight:500;">
+            <a href="<?= base_url('noticias/historial/'.$noticia['id']) ?>" style="color:#3b82f6; text-decoration:none; font-weight:500;">
                 Ver historial
             </a>
 

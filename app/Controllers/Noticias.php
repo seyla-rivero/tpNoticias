@@ -3,7 +3,8 @@
 namespace App\Controllers;
 
 use App\Models\NoticiaModel;
-
+use App\Models\HistorialModel;
+use App\Models\UsuarioModel;
 class Noticias extends BaseController
 {
    public function index()
@@ -112,6 +113,8 @@ class Noticias extends BaseController
     $accion = $this->request->getPost('accion');
 
     $model = new NoticiaModel();
+    $historialModel = new HistorialModel();
+
     $noticia = $model->find($id);
 
     $rolEditor = session()->get('rol_editor');
@@ -125,8 +128,11 @@ class Noticias extends BaseController
     if (in_array($noticia['estado'], ['Publicada', 'Expirada'])) {
         return redirect()->back()->with('error', 'No se puede modificar esta noticia');
     }
-
+    
+    $estadoAnterior = $noticia['estado'];
     $data = [];
+
+    $redirect = '/noticias';
 
     switch ($accion) {
 
@@ -166,10 +172,11 @@ class Noticias extends BaseController
 
         $data['estado'] = 'Publicada';
         $data['fecha_publicacion'] = date('Y-m-d H:i:s');
+        $redirect = '/noticias/pendientes';
+        break;
+        //$model->update($id, $data);
 
-        $model->update($id, $data);
-
-        return redirect()->to(base_url('noticias/pendientes'));
+        //return redirect()->to(base_url('noticias/pendientes'));
         case 'correccion':
             if (!$rolValidador) {
                 return redirect()->back();
@@ -180,20 +187,29 @@ class Noticias extends BaseController
             }
 
             $data['estado'] = 'Para Corrección';
+            $redirect = '/noticias/pendientes';
+            break;
+            //$model->update($id, $data);
 
-            $model->update($id, $data);
-
-            return redirect()->to(base_url('noticias/pendientes'));
+            //return redirect()->to(base_url('noticias/pendientes'));
 
         default:
            
             return redirect()->to(base_url('noticias'));
     }
 
-    $model->update($id, $data);
+    // ✅ ACTUALIZAR NOTICIA
+        $model->update($id, $data);
 
-    return redirect()->back();
-}
+        $historialModel->save([
+            'noticia_id' => $id,
+            'usuario_id' => session()->get('id'),
+            'estado_anterior' => $estadoAnterior,
+            'estado_nuevo' => $data['estado']
+        ]);
+
+        return redirect()->to($redirect);
+        }
 
         public function pendientes()
     {
@@ -229,5 +245,24 @@ class Noticias extends BaseController
         }
 
         return view('Noticias/editar', ['noticia' => $noticia]);
+    }
+
+    public function historial($id)
+    {
+        $historialModel = new HistorialModel();
+        $usuarioModel = new UsuarioModel();
+
+        $historial = $historialModel
+            ->where('noticia_id', $id)
+            ->orderBy('fecha', 'ASC')
+            ->findAll();
+
+        // agregar nombre del usuario
+        foreach ($historial as &$h) {
+            $user = $usuarioModel->find($h['usuario_id']);
+            $h['nombre'] = $user['nombre'];
+        }
+        
+        return view('Noticias/historial', ['historial' => $historial]);
     }
 }

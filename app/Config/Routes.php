@@ -19,3 +19,4 @@ $routes->post('noticias/detalle/(:num)', 'Noticias::detalle/$1');
 $routes->get('noticias/editar/(:num)', 'Noticias::editar/$1');
 $routes->post('noticias/editar/(:num)', 'Noticias::editar/$1');
 $routes->post('noticias/guardar/(:num)', 'Noticias::guardar/$1');
+$routes->get('/noticias/historial/(:num)', 'Noticias::historial/$1');
