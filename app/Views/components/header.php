@@ -103,22 +103,7 @@
 
 </div>
 
-    <!-- MENÚ DESPLEGABLE 
-    <div id="userMenu" style="
-        display: none;
-        position: absolute;
-        top: 50px;
-        right: 0;
-        background: white;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-        padding: 10px;
-        min-width: 150px;
-        z-index: 2000;
-    ">
-    </div> -->
-
+   
 </div>
 
 </div>
@@ -164,7 +149,7 @@
 
 
     <!-- CONFIGURACIÓN (para todos) -->
-    <a href="#" style="display:block; color:white; margin:12px 0; text-decoration:none;">
+    <a href="/app_tp1/public/noticias/configuracion" style="display:block; color:white; margin:12px 0; text-decoration:none;">
     ⚙ Configuración
     </a>
 

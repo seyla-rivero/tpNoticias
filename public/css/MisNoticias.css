@@ -48,3 +48,106 @@
     justify-content: space-between;
     margin-bottom: 8px;
 }
+.timeline-card:hover {
+    transform: translateY(-3px);
+    transition: 0.2s;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.timeline-item {
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/*Configuracion*/
+
+/* 🎯 TÍTULO */
+.titulo-config {
+    color: white;
+    margin-bottom: 20px;
+}
+
+/* 📦 CARD */
+.card-config {
+    background: #f5f6fa;
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 700px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+/* 🔹 BLOQUES */
+.config-item {
+    margin-bottom: 25px;
+}
+
+.config-item label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.config-item small {
+    color: #777;
+    font-size: 13px;
+}
+
+/* 🔢 INPUT + TEXTO */
+.input-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.input-group input {
+    width: 80px;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.input-group span {
+    color: #555;
+}
+
+/* 🔘 BOTÓN */
+.config-actions {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.config-actions button {
+    background: linear-gradient(135deg, #4a6cf7, #6c8cff);
+    color: white;
+    padding: 10px 25px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.config-actions button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+}
+
+hr {
+    margin: 20px 0;
+    border: none;
+    border-top: 1px solid #ddd;
+}
+
+.alert-success {
+    background: #d4edda;
+    color: #155724;
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-weight: 500;
+}

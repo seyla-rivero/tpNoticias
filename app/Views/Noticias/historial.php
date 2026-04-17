@@ -17,6 +17,18 @@ function colorEstado($estado) {
     };
 }
 ?>
+<?php
+function iconoEstado($estado) {
+    return match($estado) {
+        'Borrador' => '📝',
+        'Lista para Validación' => '📤',
+        'Para Corrección' => '✏️',
+        'Publicada' => '✅',
+        'Anulada' => '❌',
+        default => '•'
+    };
+}
+?>
 <div class="timeline">
 
 <?php foreach ($historial as $h): ?>
@@ -30,9 +42,28 @@ function colorEstado($estado) {
         <div class="timeline-card">
 
             <div class="timeline-header">
+
+            <div style="display:flex; align-items:center; gap:10px;">
+                <div style="
+                    width:35px;
+                    height:35px;
+                    border-radius:50%;
+                    background:#ddd;
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+                    font-size:14px;
+                    font-weight:bold;
+                ">
+                    <?= strtoupper(substr($h['nombre'], 0, 1)) ?>
+                </div>
+
                 <strong><?= $h['nombre'] ?></strong>
-                <span><?= date('d/m/Y H:i', strtotime($h['fecha'])) ?></span>
             </div>
+
+            <span><?= date('d M Y - H:i', strtotime($h['fecha'])) ?></span>
+
+        </div>
 
             <div class="timeline-estado">
 
@@ -44,7 +75,7 @@ function colorEstado($estado) {
                     border-radius:10px;
                     font-size:13px;
                 ">
-                    <?= $h['estado_anterior'] ?>
+                    <?= iconoEstado($h['estado_anterior']) ?> <?= $h['estado_anterior'] ?>
                 </span>
 
                 →
@@ -58,7 +89,7 @@ function colorEstado($estado) {
                     font-size:13px;
                     font-weight:bold;
                 ">
-                    <?= $h['estado_nuevo'] ?>
+                    <?= iconoEstado($h['estado_nuevo']) ?> <?= $h['estado_nuevo'] ?>
                 </span>
 
             </div>

@@ -20,3 +20,5 @@ $routes->get('noticias/editar/(:num)', 'Noticias::editar/$1');
 $routes->post('noticias/editar/(:num)', 'Noticias::editar/$1');
 $routes->post('noticias/guardar/(:num)', 'Noticias::guardar/$1');
 $routes->get('/noticias/historial/(:num)', 'Noticias::historial/$1');
+$routes->get('noticias/configuracion', 'Noticias::configuracion');
+$routes->post('noticias/configuracion/guardar', 'Noticias::guardarConfiguracion');

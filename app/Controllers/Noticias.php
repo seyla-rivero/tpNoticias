@@ -5,14 +5,20 @@ namespace App\Controllers;
 use App\Models\NoticiaModel;
 use App\Models\HistorialModel;
 use App\Models\UsuarioModel;
+use App\Models\ConfiguracionModel;
 class Noticias extends BaseController
 {
+
+   
    public function index()
 {
     $model = new NoticiaModel();
 
     $buscar = $this->request->getGet('buscar');
     $estado = $this->request->getGet('estado');
+
+    // 🔥 primero actualiza expiradas
+    $this->verificarExpiracion();
 
     //  SOLO si está logueado filtrás por usuario
     if (session()->get('logueado')) {
@@ -31,6 +37,37 @@ class Noticias extends BaseController
     $data['noticias'] = $model->findAll();
 
     return view('Noticias/index', $data);
+}
+private function verificarExpiracion()
+{
+    $model = new NoticiaModel();
+    $configModel = new ConfiguracionModel();
+    $historialModel = new HistorialModel();
+
+    $dias = $configModel->first()['dias_expiracion'];
+
+    $noticias = $model->where('estado', 'Publicada')->findAll();
+
+    foreach ($noticias as $n) {
+
+        if ($n['fecha_publicacion']) {
+
+            if ((time() - strtotime($n['fecha_publicacion'])) > ($dias * 86400)) {
+                  
+                 // 🔥 guardar historial
+                $historialModel->save([
+                    'noticia_id' => $n['id'],
+                    'usuario_id' => 0, // sistema
+                    'estado_anterior' => 'Publicada',
+                    'estado_nuevo' => 'Expirada'
+                ]);
+
+                $model->update($n['id'], [
+                    'estado' => 'Expirada'
+                ]);
+            }
+        }
+    }
 }
 
     public function crear()
@@ -264,5 +301,30 @@ class Noticias extends BaseController
         }
         
         return view('Noticias/historial', ['historial' => $historial]);
+    }
+
+    public function configuracion()
+    {
+        $model = new ConfiguracionModel();
+        $config = $model->first();
+
+        return view('noticias/configuracion', [
+            'config' => $config
+        ]);
+    }
+
+    public function guardarConfiguracion()
+    {
+        $model = new ConfiguracionModel();
+
+         $data = [
+        'dias_expiracion' => $this->request->getPost('dias_expiracion'),
+        'max_imagen' => $this->request->getPost('max_imagen')
+         ];
+
+        // ⚠️ IMPORTANTE: actualizar registro existente
+        $model->update(1, $data);
+
+        return redirect()->back()->with('success', 'Configuración actualizada');
     }
 }
