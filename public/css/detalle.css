@@ -1,0 +1,54 @@
+.btn {
+    color:white;
+    padding:8px 12px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+.btn-azul {
+    background:#3b82f6;
+}
+
+.btn-azul:hover {
+    background:#2563eb;
+}
+
+.btn-verde {
+    background:#22c55e;
+}
+
+.btn-verde:hover {
+    background:#16a34a;
+}
+
+.btn-rojo {
+    background:#ef4444;
+}
+
+.btn-rojo:hover {
+    background:#dc2626;
+}
+
+.btn-naranja {
+   background:#efad44;
+}
+
+.btn-naranja:hover {
+    background:#ce7a12;
+}
+.btn-gris {
+   background:#757473;
+}
+
+.btn-gris:hover {
+    background:#6c6b6a;
+}
+.btn-azuloscuro {
+   background:hsl(248, 35%, 48%);
+}
+
+.btn-azuloscuro:hover {
+    background:hsl(248, 36%, 40%);
+}

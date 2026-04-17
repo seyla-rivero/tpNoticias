@@ -15,3 +15,4 @@ $routes->get('/logout', 'Autenticacion::logout');
 $routes->get('noticias/pendientes', 'Noticias::pendientes');
 $routes->get('noticias/detalle/(:num)', 'Noticias::detalle/$1');
 $routes->post('noticias/cambiarEstado/(:num)', 'Noticias::cambiarEstado/$1');
+$routes->post('noticias/detalle/(:num)', 'Noticias::detalle/$1');

@@ -130,8 +130,8 @@
 
                     </form>
 
-                    <form method="post" action="/noticias/cambiarEstado/<?= $noticia['id'] ?>">
-                        <button class="btn btn-rojo" name="accion" value="anular">
+                    <form method="post"  action="<?= base_url('noticias/cambiarEstado/' . $noticia['id']) ?>">
+                    <button class="btn btn-rojo" name="accion" value="anular">
                         Anular
                     </button>
                     </form>

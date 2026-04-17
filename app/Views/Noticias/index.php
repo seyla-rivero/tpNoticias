@@ -97,46 +97,28 @@
 
     <?php if ($noticia['estado'] == 'Borrador'): ?>
 
-         <a href="<?= base_url('noticias/detalle/' .  $noticia['id']) ?>" style="
-            background:#5c6bc0;
-            color:white;
-            padding:6px 10px;
-            border-radius:8px;
-            text-decoration:none;
-            font-size:12px;
-        ">Ver</a>
+        <form method="post" action="<?= base_url('noticias/detalle/' .  $noticia['id']) ?>"> <button class="btn btn-azuloscuro" name="accion" value="ver">
+                Ver detalle
+            </button>
+        </form>  
 
-        <a href="/noticias/editar/<?= $noticia['id'] ?>" style="
-            background:#ffa726;
-            color:white;
-            padding:6px 10px;
-            border-radius:8px;
-            text-decoration:none;
-            font-size:12px;
-        ">Editar</a>
+        <form method="post" action="<?= base_url('noticias/cambiarEstado/' . $noticia['id']) ?>">
+            <button class="btn btn-gris" name="accion" value="editar">
+                Editar
+            </button>
+        </form>    
 
-        <form method="post" action="/noticias/cambiarEstado/<?= $noticia['id'] ?>">
-            <button name="accion" value="validar" style="
-                background:#42a5f5;
-                color:white;
-                padding:6px 10px;
-                border:none;
-                border-radius:8px;
-                font-size:12px;
-                cursor:pointer;
-            ">Enviar a Validación</button>
+        <form method="post" action="<?= base_url('noticias/cambiarEstado/' . $noticia['id']) ?>">
+            <button class="btn btn-azul" name="accion" value="validar">
+                Enviar a Validación
+            </button>
+
         </form>
 
-        <form method="post" action="/noticias/cambiarEstado/<?= $noticia['id'] ?>">
-            <button name="accion" value="anular" style="
-                background:#ef5350;
-                color:white;
-                padding:6px 10px;
-                border:none;
-                border-radius:8px;
-                font-size:12px;
-                cursor:pointer;
-            ">Anular</button>
+         <form method="post"  action="<?= base_url('noticias/cambiarEstado/' . $noticia['id']) ?>">
+            <button class="btn btn-rojo" name="accion" value="anular">
+                Anular
+            </button>
         </form>
 
     <?php elseif ($noticia['estado'] == 'Para Corrección'): ?>
@@ -164,25 +146,19 @@
 
     <?php else: ?>
 
-        <a href="<?= base_url('noticias/detalle/' .  $noticia['id']) ?>" style="
-            background:#5c6bc0;
-            color:white;
-            padding:6px 10px;
-            border-radius:8px;
-            text-decoration:none;
-            font-size:12px;
-        ">Ver</a>
+       <form method="post" action="<?= base_url('noticias/detalle/' .  $noticia['id']) ?>"> <button class="btn btn-azuloscuro" name="accion" value="ver">
+                Ver detalle
+            </button>
+        </form>  
 
     <?php endif; ?>
     <?php else: ?>
 
     <!-- Si NO es editor, solo puede ver -->
-    <a href="/noticias/ver/<?= $noticia['id'] ?>" style="background:#5c6bc0;
-            color:white;
-            padding:6px 10px;
-            border-radius:8px;
-            text-decoration:none;
-            font-size:12px;">Ver</a>
+    <form method="post" action="<?= base_url('noticias/detalle/' .  $noticia['id']) ?>">     <button class="btn btn-azuloscuro" name="accion" value="ver">
+        Ver detalle
+    </button>
+    </form>  
 
 <?php endif; ?>
 

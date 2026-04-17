@@ -4,6 +4,7 @@
     <title>Panel</title>
     <link rel="stylesheet" href="<?= base_url('css/crear.css') ?>">
     <link rel="stylesheet" href="<?= base_url('css/MisNoticias.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('css/detalle.css') ?>">
 </head>
 <body style="margin:0; font-family: Arial;">
 
