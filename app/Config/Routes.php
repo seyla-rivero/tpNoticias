@@ -7,6 +7,7 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Noticias::index');
 $routes->get('/noticias', 'Noticias::index');
+$routes->get('/noticias/mis', 'Noticias::misNoticias');
 $routes->get('/noticias/crear', 'Noticias::crear');
 $routes->post('/noticias/guardar', 'Noticias::guardar');
 $routes->post('/registro', 'Autenticacion::guardar');

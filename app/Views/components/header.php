@@ -128,7 +128,7 @@
 
     <?php if (session()->get('rol_editor')): ?>
 
-        <a href="/app_tp1/public/noticias" style="display:block; color:white; margin:12px 0; text-decoration:none;">
+        <a href="<?= base_url('noticias/mis') ?>" style="display:block; color:white; margin:12px 0; text-decoration:none;">
         📰 Mis Noticias
         </a>
 

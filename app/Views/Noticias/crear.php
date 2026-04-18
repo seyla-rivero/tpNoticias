@@ -1,29 +1,15 @@
 <?= $this->extend('Noticias/layout') ?>
 
 <?= $this->section('contenido') ?>
+<link rel="stylesheet" href="<?= base_url('css/crear.css') ?>">
 
-<div style="
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    min-height:80vh;
-">
+<div class="main-content">
+<div class="crear-container">
+    
 
-    <div style="
-        background:#d9d9d9;
-        padding:30px;
-        border-radius:10px;
-        width:600px;
-    ">
-
-        <h3 style="
-          margin-top:0;
-          margin-bottom:15px;
-          padding-bottom:10px;
-          border-bottom:1px solid #bbb;
-    ">
-        Crear Noticia
-        </h3>
+    <div class="crear-card">
+       
+        <h3 class="crear-titulo">Crear Noticia</h3>
         
 
         <form id="formNoticia" method="post" action="/app_tp1/public/noticias/guardar" enctype="multipart/form-data">
@@ -32,10 +18,9 @@
             <label><b>Título:</b></label><br>
             <input type="text" id="titulo" name="titulo"
                 value="<?= old('titulo') ?>" 
-                class="<?= session('errors.titulo') ? 'input-error' : '' ?>"
-                style="width:100%; padding:10px; border-radius:8px; box-sizing:border-box; margin-top:5px; margin-bottom:5px;">
+                class="input <?= session('errors.titulo') ? 'input-error' : '' ?>">
             <?php if (session('errors.titulo')): ?>
-            <p style="color:red; font-size:14px;">
+            <p class="error">
                <?= session('errors.titulo') ?>
             </p>
             <?php endif; ?>
@@ -43,43 +28,28 @@
             <!-- DESCRIPCION -->
             <label><b>Descripción:</b></label><br>
             <textarea name="descripcion"
-                class="<?= session('errors.descripcion') ? 'input-error' : '' ?>"
-                style="width:100%; padding:10px; border-radius:8px; box-sizing:border-box; margin-top:5px; margin-bottom:5px;"
+                class="input <?= session('errors.descripcion') ? 'input-error' : '' ?>"
                 ><?= old('descripcion') ?></textarea>
             <?php if (session('errors.descripcion')): ?>
-            <p style="color:red; font-size:14px;">
+            <p class="error">
                 <?= session('errors.descripcion') ?>
             </p>
             <?php endif; ?>
 
             <!-- IMAGEN -->
             <label><b>Imagen(Opcional)</b></label><br>
-            <div style="
-                background:white;
-                height:150px;
-                border-radius:10px;
-                display:flex;
-                justify-content:center;
-                align-items:center;
-                margin-top:10px;
-                margin-bottom:40px;
-            ">
+             <div class="upload-box">
                 <input type="file" id="imagen" name="imagen">
             </div>
 
             <!-- BOTONES -->
-            <div style="
-                display:flex;
-                justify-content:space-between;
-                align-items:center;
-                margin-top:40px;
-            ">
-
-                <a href="/app_tp1/public/noticias" style="text-decoration:none; color:black;">
+            <div class="acciones">
+                
+                <a href="/app_tp1/public/noticias" class="volver">
                     ← Volver
                 </a>
 
-                <div style="display:flex; gap:10px;">
+                <div class="botones">
                     <button class="btn btn-guardar" type="submit" name="accion" value="guardar">
                     Guardar cambios
                     </button>
@@ -107,6 +77,7 @@
 
     </div>
       
+</div>
 </div>
 <script>
 function mostrarModal() {
