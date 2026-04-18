@@ -14,17 +14,29 @@ class Noticias extends BaseController
 {
     $model = new NoticiaModel();
 
+    // 🔥 actualizar expiradas
+    $this->verificarExpiracion();
+
+    $data['noticias'] = $model
+        ->where('estado', 'Publicada')
+        ->findAll();
+
+    return view('Noticias/index', $data);
+}
+public function misNoticias()
+{
+    if (!session()->get('logueado')) {
+        return redirect()->to('/');
+    }
+
+    $model = new NoticiaModel();
+
     $buscar = $this->request->getGet('buscar');
     $estado = $this->request->getGet('estado');
 
-    // 🔥 primero actualiza expiradas
-    $this->verificarExpiracion();
+    $usuario_id = session()->get('id');
 
-    //  SOLO si está logueado filtrás por usuario
-    if (session()->get('logueado')) {
-        $usuario_id = session()->get('id');
-        $model = $model->where('autor_id', $usuario_id);
-    }
+    $model = $model->where('autor_id', $usuario_id);
 
     if (!empty($buscar)) {
         $model = $model->like('titulo', $buscar);
@@ -36,7 +48,7 @@ class Noticias extends BaseController
 
     $data['noticias'] = $model->findAll();
 
-    return view('Noticias/index', $data);
+    return view('Noticias/misNoticias', $data);
 }
 private function verificarExpiracion()
 {
