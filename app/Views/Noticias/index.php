@@ -1,7 +1,7 @@
 <?= $this->extend('Noticias/layout') ?>
 <?= $this->section('contenido') ?>
 
-<div class="main-content">
+<!--<div class="main-content">-->
 
 <h1 class="titulo">Noticias</h1>
 
@@ -43,6 +43,6 @@
 
 </div>
 
-</div>
+<!--</div>-->
 
 <?= $this->endSection() ?>

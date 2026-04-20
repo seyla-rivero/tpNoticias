@@ -1,187 +1,64 @@
-<div style="background: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #ddd;">
+<div class="header">
 
     <!-- IZQUIERDA -->
-    <div style="display: flex; align-items: center; gap: 15px;">
+    <div class="header-left">
         
-        <!-- BOTÓN HAMBURGUESA -->
-        <button onclick="toggleMenu()" style="font-size: 22px; background: none; border: none; cursor: pointer;">
-            ☰
-        </button>
-        <!-- LOGO + NOMBRE -->
-        <div style="display: flex; align-items: center; gap: 10px;">
+        <?php if (session()->get('logueado')): ?>
+            <button class="menu-btn" onclick="toggleMenu()">
+                ☰
+            </button>
+        <?php endif; ?>
 
-        <img src="/app_tp1/public/img/logo-noticias.png"
-         alt="Logo"
-         style="width: 35px; height: 35px; object-fit: contain;">
-
-        <span style="font-size: 18px; font-weight: bold;">
-        Gestion de Noticias
-        </span>
-
-</div>
+        <div class="logo-container">
+            <img src="<?= base_url('img/logo-noticias.png') ?>" class="logo">
+            <span class="logo-text">Gestion de Noticias</span>
+        </div>
 
     </div>
 
     <!-- DERECHA -->
-<div style="position: relative; display: flex; align-items: center; gap: 10px;">
+    <div class="header-right">
 
-<?php if (session()->get('logueado')): ?>
+    <?php if (session()->get('logueado')): ?>
 
-    <!-- AVATAR -->
-    <img src="/app_tp1/public/img/avatar.png"
-         onclick="toggleUserMenu()"
-         style="width:35px; height:35px; border-radius:50%; cursor:pointer;">
+        <img src="<?= base_url('img/avatar.png') ?>"
+             onclick="toggleUserMenu()"
+             class="avatar">
 
-    <!-- NOMBRE -->
-    <span><?= session()->get('nombre') ?></span>
+        <span class="user-name"><?= session()->get('nombre') ?></span>
 
-    <!-- MENU -->
-    <div id="userMenu" style="
-        display:none;
-        position:absolute;
-        top:50px;
-        right:0;
-        background:white;
-        border:1px solid #ddd;
-        border-radius:10px;
-        box-shadow:0 4px 10px rgba(0,0,0,0.15);
-        padding:10px;
-        min-width:160px;
-        z-index:2000;
-    ">
+        <div id="userMenu" class="user-menu">
 
-        <div style="font-size:12px; color:#888; margin-bottom:5px;">
-            Sesión iniciada como
+            <div class="user-menu-text">Sesión iniciada como</div>
+
+            <div class="user-menu-name">
+                <?= session()->get('nombre') ?>
+            </div>
+
+            <a href="<?= base_url('logout') ?>" class="logout-btn">
+                Cerrar sesión
+            </a>
+
         </div>
 
-        <div style="font-weight:bold; margin-bottom:10px;">
-            <?= session()->get('nombre') ?>
+    <?php else: ?>
+       
+        <div onclick="abrirLogin()" class="login-box">
+
+            <img src="<?= base_url('img/avatar.png') ?>" class="avatar">
+
+            <span class="login-text">
+                Iniciar sesión
+            </span>
+
         </div>
-
-        <a href="<?= base_url('index.php/logout') ?>" style="
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            padding:10px;
-            text-decoration:none;
-            background:#7e7777;
-            color:white;
-            border-radius:8px;
-            font-size:14px;
-            transition:0.2s;
-        "
-        onmouseover="this.style.background='#3b3838'"
-        onmouseout="this.style.background='#7e7777'">
-
-            Cerrar sesión
-
-        </a>
-
-    </div>
-
-<?php else: ?>
-   
-    <div onclick="abrirLogin()" style="
-        display:flex;
-        align-items:center;
-        gap:8px;
-        cursor:pointer;
-    ">
-
-        <!-- ICONO -->
-        <img src="/app_tp1/public/img/avatar.png"
-            style="width:35px; height:35px; border-radius:50%;">
-
-        <!-- TEXTO -->
-        <span style="font-weight:500;">
-            Iniciar sesión
-        </span>
-
-    </div>
-
-<?php endif; ?>
-
-</div>
-
-   
-</div>
-
-</div>
-
-<!-- MENÚ LATERAL DESLIZABLE -->
-<div id="sidebar" style="
-    position: fixed;
-    z-index: 1000;
-    top: 65px;
-    left: -300px;
-    width: 250px;
-    height: 100vh;
-    background: #1e1e2f;
-    color: white;
-    padding: 20px;
-    transition: 0.3s;
-">
-
-    <h2>Menú</h2>
-
-   <?php if (session()->get('logueado')): ?>
-
-    <?php if (session()->get('rol_editor')): ?>
-
-        <a href="<?= base_url('noticias/mis') ?>" style="display:block; color:white; margin:12px 0; text-decoration:none;">
-        📰 Mis Noticias
-        </a>
-
-        <a href="/app_tp1/public/noticias/crear" style="display:block; color:white; margin:12px 0; text-decoration:none;">
-        ➕ Crear Noticia
-        </a>
 
     <?php endif; ?>
 
-
-    <?php if (session()->get('rol_validador')): ?>
-
-        <a href="/app_tp1/public/noticias/pendientes" style="display:block; color:white; margin:12px 0; text-decoration:none;">
-        ✔ Noticias para validar
-        </a>
-
-    <?php endif; ?>
-
-
-    <!-- CONFIGURACIÓN (para todos) -->
-    <a href="/app_tp1/public/noticias/configuracion" style="display:block; color:white; margin:12px 0; text-decoration:none;">
-    ⚙ Configuración
-    </a>
-
-<?php endif; ?>
+    </div>
 
 </div>
-
-<!-- FONDO OSCURO -->
-<div id="overlay" onclick="toggleMenu()" style="
-    display:none;
-    position: fixed;
-    top:65px;
-    left:0;
-    width:100%;
-    height:100vh;
-    background: rgba(0,0,0,0.5);
-    z-index: 500;
-"></div>
-
 <script>
-function toggleMenu() {
-    var sidebar = document.getElementById("sidebar");
-    var overlay = document.getElementById("overlay");
-
-    if (sidebar.style.left === "0px") {
-        sidebar.style.left = "-300px";
-        overlay.style.display = "none";
-    } else {
-        sidebar.style.left = "0px";
-        overlay.style.display = "block";
-    }
-}
 function toggleUserMenu() {
     var menu = document.getElementById("userMenu");
 
