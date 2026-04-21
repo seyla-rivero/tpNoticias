@@ -131,10 +131,27 @@ private function verificarExpiracion()
     }
 
     // 🔹 Imagen
+    $eliminarImagen = $this->request->getPost('eliminar_imagen');
     $imagen = $this->request->getFile('imagen');
     $nombreImagen = $noticiaActual['imagen'] ?? null;
 
-    if ($imagen && $imagen->isValid() && !$imagen->hasMoved()) {
+    // 🔴 Si el usuario quiere eliminar la imagen
+    if ($eliminarImagen) {
+
+        if (!empty($noticiaActual['imagen']) && file_exists('uploads/' . $noticiaActual['imagen'])) {
+            unlink('uploads/' . $noticiaActual['imagen']);
+        }
+
+        $nombreImagen = null;
+    }
+    // 🟢 Si sube una nueva imagen
+    elseif ($imagen && $imagen->isValid() && !$imagen->hasMoved()) {
+
+        // borrar la anterior
+        if (!empty($noticiaActual['imagen']) && file_exists('uploads/' . $noticiaActual['imagen'])) {
+            unlink('uploads/' . $noticiaActual['imagen']);
+        }
+
         $nombreImagen = $imagen->getRandomName();
         $imagen->move('uploads/', $nombreImagen);
     }
@@ -154,6 +171,23 @@ private function verificarExpiracion()
     }
 
     $model->save($data);
+    $historialModel = new HistorialModel();
+
+    // Obtener estado anterior
+    $estadoAnterior = $id ? $noticiaActual['estado'] : 'Creada';
+
+    // ID de la noticia
+    $noticiaId = $id ?? $model->getInsertID();
+
+    // Registrar historial SOLO si cambió el estado
+    if ($estadoAnterior !== $estado) {
+        $historialModel->insert([
+            'noticia_id' => $noticiaId,
+            'estado_anterior' => $estadoAnterior,
+            'estado_nuevo' => $estado,
+            'usuario_id' => session()->get('id')
+        ]);
+    }
 
     return redirect()->to('/noticias');
 }

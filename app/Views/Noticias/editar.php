@@ -86,8 +86,10 @@
 
                 <!-- Imagen actual -->
                 <?php if (!empty($noticia['imagen'])): ?>
-                    <img src="/app_tp1/public/uploads/<?= $noticia['imagen'] ?>" 
-                         style="width:150px; height:150px; object-fit:cover; border-radius:10px;">
+                   <img id="preview"
+                    src="/app_tp1/public/uploads/<?= $noticia['imagen'] ?>" 
+                    style="width:150px; height:150px; object-fit:cover; border-radius:10px;">
+                        
                 <?php else: ?>
                     <div style="
                         width:150px;
@@ -109,6 +111,11 @@
             </label>
             <span id="nombreImagen" style="margin-left:10px;"></span>
 
+            <label style="display:flex; align-items:center; gap:5px; margin-top:10px;">
+                <input type="checkbox" name="eliminar_imagen" value="1">
+                Quitar imagen
+            </label>
+
             </div>
 
             <!-- BOTONES -->
@@ -119,7 +126,7 @@
                 margin-top:20px;
             ">
 
-                <a href="/app_tp1/public/noticias" style="text-decoration:none; color:black;">
+                <a href="/app_tp1/public/noticias/mis" style="text-decoration:none; color:black;">
                     ← Volver
                 </a>
 
@@ -148,9 +155,40 @@
 
 </div>
 <script>
+// 🔹 Preview cuando selecciona imagen
 document.querySelector('input[name="imagen"]').addEventListener('change', function(e) {
     if (e.target.files.length > 0) {
-        document.getElementById('nombreImagen').innerText = e.target.files[0].name;
+        const file = e.target.files[0];
+
+        // mostrar nombre
+        document.getElementById('nombreImagen').innerText = file.name;
+
+        // sacar el check de "eliminar imagen" si estaba marcado
+        const checkEliminar = document.querySelector('input[name="eliminar_imagen"]');
+        if (checkEliminar) {
+            checkEliminar.checked = false;
+        }
+
+        // preview
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('preview').src = e.target.result;
+        }
+        reader.readAsDataURL(file);
+    }
+});
+
+// 🔹 Si marca "quitar imagen"
+document.querySelector('input[name="eliminar_imagen"]').addEventListener('change', function(e) {
+    if (e.target.checked) {
+        // borrar preview
+        document.getElementById('preview').src = '';
+
+        // limpiar input file
+        document.querySelector('input[name="imagen"]').value = '';
+
+        // limpiar nombre
+        document.getElementById('nombreImagen').innerText = '';
     }
 });
 </script>

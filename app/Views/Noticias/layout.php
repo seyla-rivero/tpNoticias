@@ -3,7 +3,7 @@
 <head>
     <title>Panel</title>
     <link rel="stylesheet" href="<?= base_url('css/crear.css') ?>">
-    <link rel="stylesheet" href="<?= base_url('css/MisNoticias.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('css/publicadas.css') ?>">
     <link rel="stylesheet" href="<?= base_url('css/detalle.css') ?>">
     <link rel="stylesheet" href="<?= base_url('css/modals.css') ?>">
     <link rel="stylesheet" href="<?= base_url('css/menu.css') ?>">

@@ -8,6 +8,7 @@
 <?php
 function colorEstado($estado) {
     return match($estado) {
+        'Creada' => '#6c757d',
         'Borrador' => '#f0ad4e',          
         'Lista para Validación' => '#4a90e2', 
         'Para Corrección' => '#f39c12',   
@@ -20,6 +21,7 @@ function colorEstado($estado) {
 <?php
 function iconoEstado($estado) {
     return match($estado) {
+        'Creada' => '🆕',
         'Borrador' => '📝',
         'Lista para Validación' => '📤',
         'Para Corrección' => '✏️',

@@ -41,7 +41,7 @@
         <div style="flex:2;">Título</div>
         <div style="flex:1;">Estado</div>
         <div style="flex:1;">Creación</div>
-        <div style="width:120px;"></div>
+        <div style="flex:2; text-align:right;">Acciones</div>
     </div>
 
     <?php foreach ($noticias as $noticia): ?>
@@ -92,7 +92,7 @@
             </div>
 
             <!-- BOTON -->
-        <div style="flex:1; display:flex; gap:8px; justify-content:flex-end;">
+        <div style="flex:2; display:flex; gap:8px; justify-content:flex-end;">
     <?php if (session()->get('rol_editor')): ?>
 
     <?php if ($noticia['estado'] == 'Borrador'): ?>
@@ -106,7 +106,7 @@
             <button class="btn btn-gris" name="accion" value="editar">
                 Editar
             </button>
-        </form>    
+        </form>   
 
         <form method="post" action="<?= base_url('noticias/cambiarEstado/' . $noticia['id']) ?>">
             <button class="btn btn-azul" name="accion" value="validar">

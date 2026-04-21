@@ -45,7 +45,7 @@
             <!-- BOTONES -->
             <div class="acciones">
                 
-                <a href="/app_tp1/public/noticias" class="volver">
+                <a href="/app_tp1/public/noticias/mis" class="volver">
                     ← Volver
                 </a>
 
