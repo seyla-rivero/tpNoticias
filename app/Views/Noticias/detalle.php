@@ -17,9 +17,11 @@
                 <?= $noticia['titulo'] ?>
             </h2>
 
-            <a href="<?= base_url('noticias/historial/'.$noticia['id']) ?>" style="color:#3b82f6; text-decoration:none; font-weight:500;">
-                Ver historial
-            </a>
+             <?php if (session()->get('logueado')): ?>
+                <a href="<?= base_url('noticias/historial/' . $noticia['id']) ?>">
+                    Ver historial
+                </a>
+            <?php endif; ?>
 
         </div>
 
@@ -178,7 +180,7 @@
 
                 <?php else: ?>
 
-                    <span style="color:#777;">Sin acciones disponibles</span>
+                    <!--<span style="color:#777;">Sin acciones disponibles</span>-->
 
                 <?php endif; ?>
 

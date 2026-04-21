@@ -331,23 +331,30 @@ private function verificarExpiracion()
     }
 
     public function historial($id)
-    {
-        $historialModel = new HistorialModel();
-        $usuarioModel = new UsuarioModel();
+{
+    $rol = session()->get('rol');
 
-        $historial = $historialModel
-            ->where('noticia_id', $id)
-            ->orderBy('fecha', 'ASC')
-            ->findAll();
-
-        // agregar nombre del usuario
-        foreach ($historial as &$h) {
-            $user = $usuarioModel->find($h['usuario_id']);
-            $h['nombre'] = $user['nombre'];
-        }
-        
-        return view('Noticias/historial', ['historial' => $historial]);
+    // Si no está logueado o no tiene rol permitido
+    if (!$rol || !in_array($rol, ['rol_editor', 'rol_validador'])) {
+        return redirect()->to('/login'); // o a donde quieras
     }
+
+    $historialModel = new HistorialModel();
+    $usuarioModel = new UsuarioModel();
+
+    $historial = $historialModel
+        ->where('noticia_id', $id)
+        ->orderBy('fecha', 'ASC')
+        ->findAll();
+
+    // agregar nombre del usuario
+    foreach ($historial as &$h) {
+        $user = $usuarioModel->find($h['usuario_id']);
+        $h['nombre'] = $user['nombre'] ?? 'Desconocido';
+    }
+
+    return view('Noticias/historial', ['historial' => $historial]);
+}
 
     public function configuracion()
     {

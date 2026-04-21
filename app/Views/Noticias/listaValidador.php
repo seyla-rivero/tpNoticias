@@ -2,13 +2,6 @@
 
 <?= $this->section('contenido') ?>
 <div class="main-content">
-<form method="get" style="margin-bottom:20px; display:flex; gap:10px;">
-<!-- BUSCADOR -->
-    <input type="text" name="buscar" placeholder="Buscar noticia..." onkeydown="if(event.key==='Enter'){ this.form.estado.value=''; }" 
-        value="<?= $_GET['buscar'] ?? '' ?>"
-        style="padding:8px; border-radius:8px; flex:1;">
-
-</form>
 
  <h1 style="margin-bottom:20px;">Noticias para Validar</h1>
 
