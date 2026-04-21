@@ -141,7 +141,7 @@
                         Enviar a Validación
                     </button>
 
-                    <a href="<?= base_url('noticias') ?>" class="btn btn-anular" style="text-decoration:none;">
+                    <a href="<?= base_url('noticias/mis') ?>" class="btn btn-anular" style="text-decoration:none;">
                         Cancelar
                     </a>
 

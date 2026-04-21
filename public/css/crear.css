@@ -39,16 +39,24 @@
 }
 
 /* UPLOAD */
-.upload-box {
-    background: white;
-    height: 150px;
-    border-radius: 10px;
+.bloque-imagen {
+    margin-bottom: 20px;
+}
+
+.preview-container {
+    margin-top: 10px;
     display: flex;
     justify-content: center;
-    align-items: center;
-    margin-top: 10px;
-    margin-bottom: 30px;
 }
+
+#previewImagen {
+    max-width: 300px;
+    max-height: 200px;
+    display: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
 
 /* BOTONES */
 .acciones {

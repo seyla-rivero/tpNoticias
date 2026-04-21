@@ -214,9 +214,9 @@ private function verificarExpiracion()
     
     $estadoAnterior = $noticia['estado'];
     $data = [];
-
+    
     $redirect = '/noticias';
-
+    
     switch ($accion) {
 
         // 🟡 SOLO EDITOR

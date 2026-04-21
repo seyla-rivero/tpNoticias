@@ -109,7 +109,7 @@
 
             <!-- VOLVER -->
             <?php
-            $urlVolver = 'noticias';
+            $urlVolver = 'noticias/mis';
 
             if (session()->get('rol_validador')) {
                 $urlVolver = 'noticias/pendientes';
@@ -127,21 +127,22 @@
                 <?php if ($noticia['estado'] == 'Borrador'): ?>
 
                      <form method="post" action="<?= base_url('noticias/editar/' . $noticia['id']) ?>">
-                    <button class="btn btn-gris" name="accion" value="editar">
-                        Editar
-                    </button>
+                        <button class="btn btn-gris" name="accion" value="editar">
+                            Editar
+                        </button>
+                    </form>
 
                     <form method="post" action="<?= base_url('noticias/cambiarEstado/' . $noticia['id']) ?>">
-                    <button class="btn btn-azul" name="accion" value="validar">
-                        Enviar a Validación
-                    </button>
+                        <button type="submit" class="btn btn-azul" name="accion" value="validar">
+                            Enviar a Validación
+                        </button>
 
                     </form>
 
-                    <form method="post"  action="<?= base_url('noticias/cambiarEstado/' . $noticia['id']) ?>">
-                    <button class="btn btn-rojo" name="accion" value="anular">
-                        Anular
-                    </button>
+                    <form method="post"  action="<?= base_url('noticias/cambiarEstado/' .$noticia['id']) ?>">
+                        <button class="btn btn-rojo" name="accion" value="anular">
+                            Anular
+                        </button>
                     </form>
 
                 <?php elseif ($noticia['estado'] == 'Para Corrección'): ?>

@@ -37,9 +37,16 @@
             <?php endif; ?>
 
             <!-- IMAGEN -->
-            <label><b>Imagen(Opcional)</b></label><br>
-             <div class="upload-box">
-                <input type="file" id="imagen" name="imagen">
+            <div class="bloque-imagen">
+
+                <label>Imagen (Opcional)</label>
+
+                <input type="file" name="imagen" id="imagen">
+
+                <div class="preview-container">
+                    <img id="previewImagen">
+                </div>
+
             </div>
 
             <!-- BOTONES -->
@@ -58,9 +65,9 @@
                     Enviar a validación
                     </button>
 
-                    <button class="btn btn-anular" type="submit" name="accion "value="anular">
-                    Cancelar
-                    </button>
+                    <a href="<?= base_url('noticias/mis') ?>" class="btn btn-gris" style="text-decoration: none;">
+                        Cancelar
+                    </a>
                 </div>
 
             </div>
@@ -97,6 +104,22 @@ document.getElementById("formNoticia").addEventListener("submit", function(e) {
     mostrarModal();
   }
 });
+
+document.getElementById('imagen').addEventListener('change', function(e) {
+     const file = e.target.files[0];
+    const preview = document.getElementById('previewImagen');
+
+    if (file) {
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+            preview.src = e.target.result;
+            preview.style.display = 'block';
+        }
+
+        reader.readAsDataURL(file);
+    }
+}); 
 </script>        
 
 <?= $this->endSection() ?>
