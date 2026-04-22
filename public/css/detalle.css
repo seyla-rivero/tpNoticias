@@ -1,3 +1,106 @@
+/* CONTENEDOR PRINCIPAL */
+.detalle-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.detalle-card {
+    width: 800px;
+    background: #d9d9d9;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+/* HEADER */
+.detalle-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.detalle-header h2 {
+    margin: 0;
+}
+
+/* BOTON HISTORIAL */
+.btn-historial {
+    background-color: #007bff;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.btn-historial:hover {
+    background-color: #0056b3;
+}
+
+/* ESTADO */
+.detalle-estado {
+    margin-top: 10px;
+}
+
+.detalle-estado span {
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* INFO */
+.detalle-info {
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid #bbb;
+    font-size: 14px;
+    color: #555;
+    display: flex;
+    gap: 20px;
+}
+
+/* IMAGEN */
+.detalle-img {
+    margin-top: 20px;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.detalle-img img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+}
+
+.sin-imagen {
+    padding: 40px;
+    text-align: center;
+    color: #999;
+}
+
+/* DESCRIPCION */
+.detalle-descripcion {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+/* Botones */
+.detalle-botones {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.detalle-volver {
+    text-decoration: none;
+    color: black;
+}
+
+.detalle-acciones {
+    display: flex;
+    gap: 10px;
+}
 .btn {
     color:white;
     padding:8px 12px;
@@ -52,3 +155,4 @@
 .btn-azuloscuro:hover {
     background:hsl(248, 36%, 40%);
 }
+

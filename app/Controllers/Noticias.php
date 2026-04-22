@@ -332,11 +332,12 @@ private function verificarExpiracion()
 
     public function historial($id)
 {
-    $rol = session()->get('rol');
-
-    // Si no está logueado o no tiene rol permitido
-    if (!$rol || !in_array($rol, ['rol_editor', 'rol_validador'])) {
-        return redirect()->to('/login'); // o a donde quieras
+    // Verificar sesión y roles
+    if (
+        !session()->get('logueado') || 
+        (!session()->get('rol_editor') && !session()->get('rol_validador'))
+    ) {
+        return redirect()->to('/login');
     }
 
     $historialModel = new HistorialModel();
@@ -347,7 +348,7 @@ private function verificarExpiracion()
         ->orderBy('fecha', 'ASC')
         ->findAll();
 
-    // agregar nombre del usuario
+    // Agregar nombre del usuario
     foreach ($historial as &$h) {
         $user = $usuarioModel->find($h['usuario_id']);
         $h['nombre'] = $user['nombre'] ?? 'Desconocido';

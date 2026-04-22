@@ -1,24 +1,23 @@
 <?= $this->extend('Noticias/layout') ?>
 <?= $this->section('contenido') ?>
 
-<div style="display:flex; justify-content:center; margin-top:40px;">
+<div class="detalle-container">
 
-    <div style="
-        width:800px;
-        background:#d9d9d9;
-        border-radius:12px;
-        padding:20px;
-    ">
+    <div class="detalle-card">
+    
 
         <!-- HEADER -->
-        <div style="display:flex; justify-content:space-between; align-items:center;">
+        <div class="detalle-header">
 
-            <h2 style="margin:0;">
+            <h2>
                 <?= $noticia['titulo'] ?>
             </h2>
 
-             <?php if (session()->get('logueado')): ?>
-                <a href="<?= base_url('noticias/historial/' . $noticia['id']) ?>">
+           <?php if (
+                session()->get('logueado') && 
+                (session()->get('rol_editor') || session()->get('rol_validador'))
+            ): ?>
+                <a href="<?= base_url('noticias/historial/' . $noticia['id']) ?>" class="btn-historial">
                     Ver historial
                 </a>
             <?php endif; ?>
@@ -39,28 +38,16 @@
             }
         ?>
 
-        <div style="margin-top:10px;">
+        <div class="detalle-estado">
             <span style="
                 background:<?= $color ?>;
-                padding:6px 12px;
-                border-radius:8px;
-                font-size:13px;
-                font-weight:500;
             ">
                 <?= $noticia['estado'] ?>
             </span>
         </div>
 
         <!-- INFO -->
-        <div style="
-            margin-top:15px;
-            padding-top:10px;
-            border-top:1px solid #bbb;
-            font-size:14px;
-            color:#555;
-            display:flex;
-            gap:20px;
-        ">
+        <div class="detalle-info">
 
             <span>👤 <?= $noticia['autor_nombre'] ?? 'Autor' ?></span>
 
@@ -78,36 +65,26 @@
         </div>
 
         <!-- IMAGEN -->
-        <div style="
-            margin-top:20px;
-            background:white;
-            border-radius:10px;
-            overflow:hidden;
-        ">
+        <div class="detalle-img">
 
             <?php if ($noticia['imagen']): ?>
-                <img src="<?= base_url('uploads/' . $noticia['imagen']) ?>" 
-                style="
-                    width:100%;
-                    max-height:400px;
-                    object-fit:cover;
-                ">
+                <img src="<?= base_url('uploads/' . $noticia['imagen']) ?>">
             <?php else: ?>
-                <div style="padding:40px; text-align:center; color:#999;">
+                <div class="sin-imagen">
                     Sin imagen
                 </div>
             <?php endif; ?>
 
         </div>
         <!-- DESCRIPCIÓN -->
-        <p style="margin-top:20px; font-size:14px;">
+        <p class="detalle-descripcion">
             <?= $noticia['descripcion'] ?>
         </p>
 
         <hr>
 
         <!-- BOTONES -->
-        <div style="display:flex; justify-content:space-between; align-items:center;">
+        <div class="detalle-botones">
 
             <!-- VOLVER -->
             <?php
@@ -119,12 +96,12 @@
             ?>
 
             <a href="<?= base_url($urlVolver) ?>" 
-            style="text-decoration:none; color:black;">
+            class="detalle-volver">
                 ← Volver
             </a>
 
             <!-- ACCIONES -->
-            <div style="display:flex; gap:10px;">
+            <div class="detalle-acciones">
 
                 <?php if ($noticia['estado'] == 'Borrador'): ?>
 
@@ -153,9 +130,10 @@
                     <button class="btn btn-gris" name="accion" value="editar">
                         Editar
                     </button>
+                    </form>
                     
                     <form method="post" action="/noticias/cambiarEstado/<?= $noticia['id'] ?>">
-                        <button name="accion" value="validar" style="background:#3b82f6; color:white; padding:8px 12px; border:none; border-radius:8px;">
+                        <button name="accion" value="validar" class="btn btn-azul"">
                             Reenviar
                         </button>
                     </form>
@@ -172,15 +150,11 @@
 
                         <form method="post" action="<?= base_url('noticias/cambiarEstado/' . $noticia['id']) ?>">
                            <button class="btn btn-naranja" name="accion" value="correccion">
-                        Para Corrección
-                    </button>
-                </form>
+                            Para Corrección
+                           </button>
+                        </form>
 
                     <?php endif; ?>
-
-                <?php else: ?>
-
-                    <!--<span style="color:#777;">Sin acciones disponibles</span>-->
 
                 <?php endif; ?>
 
