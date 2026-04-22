@@ -51,13 +51,35 @@ class Autenticacion extends BaseController
 
     $model = new UsuarioModel();
 
-    // Guardar usuario
+        // Obtener roles
+        $rol_editor = $this->request->getPost('rol_editor') ? 1 : 0;
+        $rol_validador = $this->request->getPost('rol_validador') ? 1 : 0;
+        $rol_ambos = $this->request->getPost('rol_ambos');
+
+        // Si selecciona "ambos"
+        if ($rol_ambos) {
+            $rol_editor = 1;
+            $rol_validador = 1;
+        }
+
+        if ($rol_editor == 0 && $rol_validador == 0) {
+        return redirect()->back()
+            ->withInput()
+            ->with('error_roles', 'Debe seleccionar al menos un rol')
+            ->with('modal', 'registro');
+}
+
+
+        // Guardar usuario
         $id = $model->insert([
             'nombre' => $this->request->getPost('nombre'),
             'email' => $this->request->getPost('email'),
-            'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
-            'rol_editor' => $this->request->getPost('rol_editor') ? 1 : 0,
-            'rol_validador' => $this->request->getPost('rol_validador') ? 1 : 0
+            'password' => password_hash(
+                $this->request->getPost('password'),
+                PASSWORD_DEFAULT
+            ),
+            'rol_editor' => $rol_editor,
+            'rol_validador' => $rol_validador
         ]);
 
         $usuario = $model->find($id);

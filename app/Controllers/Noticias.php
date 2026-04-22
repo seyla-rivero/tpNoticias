@@ -83,7 +83,10 @@ private function verificarExpiracion()
 }
 
     public function crear()
-    {
+    {   
+        if (session('rol_editor') != 1) {
+        return redirect()->to('/noticias');
+    }
         return view('Noticias/crear');
     }
 
@@ -206,6 +209,14 @@ private function verificarExpiracion()
     if (!$noticia) {
         return redirect()->back();
     }
+    // 🔐 Evitar que valide su propia noticia
+    if (
+        in_array($accion, ['publicar', 'correccion']) &&
+        $noticia['autor_id'] == session()->get('id')
+    ) {
+        return redirect()->back()
+            ->with('error', 'No podés validar tu propia noticia.');
+    }
 
     // 🚫 No modificar si está cerrada
     if (in_array($noticia['estado'], ['Publicada', 'Expirada'])) {
@@ -300,6 +311,7 @@ private function verificarExpiracion()
 
         $data['noticias'] = $model
             ->where('estado', 'Lista para Validación')
+            ->where('autor_id !=', session()->get('id'))
             ->findAll();
 
         return view('noticias/listaValidador', $data);

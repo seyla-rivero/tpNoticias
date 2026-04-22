@@ -5,14 +5,14 @@
 
     <h2>Menú</h2>
 
+    <a href="<?= base_url('noticias') ?>">Inicio</a>
+
     <?php if (session()->get('rol_editor')): ?>
-        <a href="<?= base_url('noticias') ?>">Inicio</a>
         <a href="<?= base_url('noticias/mis') ?>">📰 Mis Noticias</a>
         <a href="<?= base_url('noticias/crear') ?>">➕ Crear Noticia</a>
     <?php endif; ?>
 
     <?php if (session()->get('rol_validador')): ?>
-        <a href="<?= base_url('noticias') ?>">Inicio</a>
         <a href="<?= base_url('noticias/pendientes') ?>">✔ Noticias para validar</a>
     <?php endif; ?>
 

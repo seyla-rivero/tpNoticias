@@ -72,7 +72,7 @@
         gap:5px;
         cursor:pointer;
     ">
-        <input type="checkbox" name="rol_editor" value="editor" >
+        <input type="checkbox" name="rol_editor" value="1" >
         Editor
     </label>
 
@@ -82,11 +82,32 @@
         gap:5px;
         cursor:pointer;
     ">
-        <input type="checkbox" name="rol_validador" value="validador" >
+        <input type="checkbox" name="rol_validador" value="1" >
         Validador
     </label>
 
+    <label style="
+        display:flex;
+        align-items:center;
+        gap:5px;
+        cursor:pointer;
+    ">
+        <input type="checkbox" name="rol_ambos" value="1" >
+        Editor y Validador
+    </label>
+    
 </div>
+    <?php if (session('error_roles')): ?>
+        <div style="
+            color:red;
+            font-size:13px;
+            text-align:center;
+            margin-top:-10px;
+            margin-bottom:15px;
+        ">
+            <?= session('error_roles') ?>
+        </div>
+    <?php endif; ?>
        
 
     <button type="submit" style="
@@ -104,3 +125,35 @@
     </button>
 
 </form>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const editor = document.querySelector('input[name="rol_editor"]');
+    const validador = document.querySelector('input[name="rol_validador"]');
+    const ambos = document.querySelector('input[name="rol_ambos"]');
+
+    // Si marca "ambos"
+    ambos.addEventListener('change', function () {
+
+        if (ambos.checked) {
+            editor.checked = false;
+            validador.checked = false;
+        }
+
+    });
+
+    // Si marca editor o validador
+    editor.addEventListener('change', function () {
+        if (editor.checked) {
+            ambos.checked = false;
+        }
+    });
+
+    validador.addEventListener('change', function () {
+        if (validador.checked) {
+            ambos.checked = false;
+        }
+    });
+
+});
+</script>

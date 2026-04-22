@@ -87,15 +87,8 @@
         <div class="detalle-botones">
 
             <!-- VOLVER -->
-            <?php
-            $urlVolver = 'noticias/mis';
 
-            if (session()->get('rol_validador')) {
-                $urlVolver = 'noticias/pendientes';
-            }
-            ?>
-
-            <a href="<?= base_url($urlVolver) ?>" 
+            <a href="<?= base_url('noticias') ?>" 
             class="detalle-volver">
                 ← Volver
             </a>
@@ -140,7 +133,8 @@
 
                 <?php elseif ($noticia['estado'] == 'Lista para Validación'): ?>
 
-                    <?php if (session()->get('rol_validador')): ?>
+                    <?php if (session()->get('rol_validador') 
+                            && $noticia['autor_id'] != session()->get('id')): ?>
 
                         <form method="post" action="<?= base_url('noticias/cambiarEstado/' . $noticia['id']) ?>">
                         <button class="btn btn-verde" name="accion" value="publicar">
