@@ -19,6 +19,8 @@ class Noticias extends BaseController
 
     $data['noticias'] = $model
         ->where('estado', 'Publicada')
+        ->orderBy('fecha_publicacion', 'DESC')
+        ->orderBy('id', 'DESC')
         ->findAll();
 
     return view('Noticias/index', $data);
