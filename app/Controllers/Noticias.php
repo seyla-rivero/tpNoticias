@@ -31,23 +31,20 @@ public function misNoticias()
 
     $model = new NoticiaModel();
 
-    $buscar = $this->request->getGet('buscar');
     $estado = $this->request->getGet('estado');
 
     $usuario_id = session()->get('id');
 
     $model = $model->where('autor_id', $usuario_id);
 
-    if (!empty($buscar)) {
-        $model = $model->like('titulo', $buscar);
-    }
 
     if (!empty($estado)) {
         $model = $model->where('estado', $estado);
     }
 
     $data['noticias'] = $model->findAll();
-
+    $data['estado'] = $estado;
+    
     return view('Noticias/misNoticias', $data);
 }
 private function verificarExpiracion()

@@ -2,28 +2,53 @@
 
 <?= $this->section('contenido') ?>
 <div class="main-content">
+<h1 style="margin-bottom:20px;">Mis Noticias</h1>
+
 <form method="get" style="margin-bottom:20px; display:flex; gap:10px;">
 
     <!-- FILTRO ESTADO -->
-    <select name="estado" onchange="this.form.buscar.value=''; this.form.submit()" style="padding:8px; border-radius:8px;">
-        <option value="">Todos los estados</option>
-        <option value="Borrador" <?= ($_GET['estado'] ?? '') == 'Borrador' ? 'selected' : '' ?>>Borrador</option>
-        <option value="Lista para Validación" <?= ($_GET['estado'] ?? '') == 'Lista para Validación' ? 'selected' : '' ?>>Validación</option>
-        <option value="Para Corrección" <?= ($_GET['estado'] ?? '') == 'Para Correción' ? 'selected' : '' ?>>Corrección</option>
-        <option value="Publicada" <?= ($_GET['estado'] ?? '') == 'Publicada' ? 'selected' : '' ?>>Publicada</option>
-        <option value="Expirada" <?= ($_GET['estado'] ?? '') == 'Expirada' ? 'selected' : '' ?>>Expirada</option>
-        <option value="Anulada" <?= ($_GET['estado'] ?? '') == 'Anulada' ? 'selected' : '' ?>>Anulada</option>
-    </select>
+    <select name="estado"
+        onchange="this.form.submit()"
+        style="padding:8px; border-radius:8px;">
 
-    <!-- BUSCADOR -->
-    <input type="text" name="buscar" placeholder="Buscar noticia..." onkeydown="if(event.key==='Enter'){ this.form.estado.value=''; }" 
-        value="<?= $_GET['buscar'] ?? '' ?>"
-        style="padding:8px; border-radius:8px; flex:1;">
+    <option value=""
+        <?= ($estado ?? '') == '' ? 'selected' : '' ?>>
+        Todos los estados
+    </option>
+
+    <option value="Borrador"
+        <?= ($estado ?? '') == 'Borrador' ? 'selected' : '' ?>>
+        Borrador
+    </option>
+
+    <option value="Lista para Validación"
+        <?= ($estado ?? '') == 'Lista para Validación' ? 'selected' : '' ?>>
+        Validación
+    </option>
+
+    <option value="Para Corrección"
+        <?= ($estado ?? '') == 'Para Corrección' ? 'selected' : '' ?>>
+        Corrección
+    </option>
+
+    <option value="Publicada"
+        <?= ($estado ?? '') == 'Publicada' ? 'selected' : '' ?>>
+        Publicada
+    </option>
+
+    <option value="Expirada"
+        <?= ($estado ?? '') == 'Expirada' ? 'selected' : '' ?>>
+        Expirada
+    </option>
+
+    <option value="Anulada"
+        <?= ($estado ?? '') == 'Anulada' ? 'selected' : '' ?>>
+        Anulada
+    </option>
+
+</select>
 
 </form>
-
-
-<h1 style="margin-bottom:20px;">Mis Noticias</h1>
 
 <div style="
     background:#eee;

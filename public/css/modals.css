@@ -1,3 +1,4 @@
+/*Modal*/
 .modal {
     display: none;
     position: fixed;
@@ -17,7 +18,7 @@
     border-radius: 18px;
     width: 400px;
     text-align: center;
-    border: 3px solid #3bb3ff;
+    border: 3px solid #7b2cbf;
     box-shadow: 0 10px 25px rgba(0,0,0,0.2);
     position: relative;
 }
@@ -32,14 +33,16 @@
 }
 
 .modal-logo {
-    width: 70px;
+    width: 90px;
     margin-bottom: 10px;
 }
 
 .modal-title {
-    margin-bottom: 25px;
-    font-weight: bold;
-    letter-spacing: 1px;
+    font-size: 26px;   
+    font-weight: 700;
+    font-family: 'Poppins', 'Segoe UI', sans-serif; 
+    color: #7b2cbf; 
+    letter-spacing: 1px; 
 }
 
 .modal-actions {
@@ -56,12 +59,63 @@
 }
 
 .btn-primario {
-    background: #3b6eea;
+    background: #7b2cbf;
     color: white;
     border: none;
 }
 
 .btn-secundario {
     background: #e6e6e6;
-    border: 2px solid #3b6eea;
+    border: 2px solid #7b2cbf;
+}
+
+/*Registro y Login*/
+/* Inputs */
+.form-input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* Mensaje de error */
+.error-text {
+    color: red;
+    font-size: 12px;
+    margin-top: -8px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+/* Roles */
+.roles-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.roles-title {
+    font-weight: bold;
+    min-width: 60px;
+}
+
+.roles-label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+/* Error roles */
+.error-roles {
+    color: red;
+    font-size: 13px;
+    text-align: center;
+    margin-top: -10px;
+    margin-bottom: 15px;
 }

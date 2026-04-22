@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="<?= base_url('css/modals.css') ?>">
     <link rel="stylesheet" href="<?= base_url('css/menu.css') ?>">
     <link rel="stylesheet" href="<?= base_url('css/header.css') ?>">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body style="margin:0; font-family: Arial;">
 
@@ -16,7 +17,7 @@
     <?= view('components/menu') ?>
 
     <!-- CONTENIDO -->
-    <div style="padding: 30px; background: #2F4A8A; min-height: 100vh;">
+    <div style="padding: 30px; background: #f3e8ff; min-height: 100vh;">
         <?= $this->renderSection('contenido') ?>
     </div>
     <!-- Modal de Login y Registro-->

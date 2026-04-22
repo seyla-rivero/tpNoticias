@@ -2,14 +2,15 @@
 .sidebar {
     position: fixed;
     z-index: 1000;
-    top: 65px;
+    top: 88px;
     left: -300px;
     width: 250px;
-    height: calc(100vh - 65px);
-    background: #1e1e2f;
+    height: calc(100vh - 88px);
+    background: #7b2cbf;
     color: white;
     padding: 20px;
     transition: left 0.3s ease;
+    box-shadow: 2px 0 12px rgba(0,0,0,0.2);
 }
 
 /* ACTIVO (cuando se abre) */
@@ -20,32 +21,35 @@
 /* TITULO */
 .sidebar h2 {
     margin-bottom: 20px;
+    font-size: 20px;
+    border-bottom: 2px solid #9d4edd;
+    padding-bottom: 10px;;
 }
 
 /* LINKS */
 .sidebar a {
     display: block;
     color: white;
-    margin: 12px 0;
+    margin: 8px 0;
     text-decoration: none;
-    padding: 10px;
-    border-radius: 8px;
+    padding: 12px;
+    border-radius: 10px;
     transition: 0.2s;
 }
 
 /* HOVER */
 .sidebar a:hover {
-    background: #2f2f45;
+    background:  #9d4edd;;
 }
 
 /* OVERLAY (fondo oscuro) */
 .overlay {
     display: none;
     position: fixed;
-    top: 65px;
+    top: 88px;
     left: 0;
     width: 100%;
-    height: calc(100vh - 65px);
+    height: calc(100vh - 88px);
     background: rgba(0,0,0,0.5);
     z-index: 500;
 }

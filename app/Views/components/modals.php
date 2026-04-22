@@ -5,9 +5,9 @@
 
         <span onclick="cerrarLogin()" class="modal-close">✖</span>
 
-        <img src="<?= base_url('img/logo-noticias.png') ?>" class="modal-logo">
+        <img src="<?= base_url('img/logo-bts.png') ?>" class="modal-logo">
 
-        <h2 class="modal-title">GESTIÓN DE NOTICIAS</h2>
+        <h2 class="modal-title">Portal de Noticias de BTS</h2>
 
         <div class="modal-actions">
 
@@ -32,9 +32,9 @@
 
         <span onclick="cerrarLoginForm()" class="modal-close">✖</span>
 
-        <img src="<?= base_url('img/logo-noticias.png') ?>" class="modal-logo">
+        <img src="<?= base_url('img/logo-bts.png') ?>" class="modal-logo">
 
-        <h2 class="modal-title">GESTIÓN DE NOTICIAS</h2>
+        <h2 class="modal-title">Portal de Noticias de BTS</h2>
 
         <?= view('components/login_form') ?>
 
@@ -49,9 +49,9 @@
 
         <span onclick="cerrarRegistro()" class="modal-close">✖</span>
 
-        <img src="<?= base_url('img/logo-noticias.png') ?>" class="modal-logo">
+        <img src="<?= base_url('img/logo-bts.png') ?>" class="modal-logo">
 
-        <h2 class="modal-title">GESTIÓN DE NOTICIAS</h2>
+        <h2 class="modal-title">Portal de Noticias de BTS</h2>
 
         <?= view('components/register_form') ?>
 

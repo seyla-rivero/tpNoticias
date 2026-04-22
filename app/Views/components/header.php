@@ -10,8 +10,8 @@
         <?php endif; ?>
 
         <div class="logo-container">
-            <img src="<?= base_url('img/logo-noticias.png') ?>" class="logo">
-            <span class="logo-text">Gestion de Noticias</span>
+            <img src="<?= base_url('img/logo-bts.png') ?>" class="logo">
+            <span class="logo-text">Portal de Noticias de BTS</span>
         </div>
 
     </div>

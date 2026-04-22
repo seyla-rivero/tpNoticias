@@ -6,6 +6,7 @@
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #ddd;
+    border-bottom: 3px solid #7b2cbf;
 }
 
 /* IZQUIERDA */
@@ -22,22 +23,29 @@
     cursor: pointer;
 }
 
-/* LOGO */
+/* Logo */
 .logo-container {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 15px; 
 }
-
+/*Imagen del Logo*/
 .logo {
-    width: 35px;
-    height: 35px;
+    width: 60px;
+    height: 60px;
     object-fit: contain;
 }
-
+/*Texto*/
 .logo-text {
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 26px;   
+    font-weight: 700;
+    font-family: 'Poppins', 'Segoe UI', sans-serif; 
+    color: #7b2cbf; 
+    letter-spacing: 1px; 
+}
+.logo-container:hover .logo-text {
+    color: #9d4edd; 
+    transition: 0.3s;
 }
 
 /* DERECHA */

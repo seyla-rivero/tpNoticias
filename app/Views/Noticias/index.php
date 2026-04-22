@@ -3,7 +3,7 @@
 
 <!--<div class="main-content">-->
 
-<h1 class="titulo">Noticias</h1>
+<h1 class="titulo">Noticias de BTS</h1>
 
 <div class="news-grid">
 
