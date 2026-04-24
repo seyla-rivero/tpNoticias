@@ -5,18 +5,26 @@
 
     <h2>Menú</h2>
 
-    <a href="<?= base_url('noticias') ?>">Inicio</a>
-
     <?php if (session()->get('rol_editor')): ?>
-        <a href="<?= base_url('noticias/mis') ?>">📰 Mis Noticias</a>
-        <a href="<?= base_url('noticias/crear') ?>">➕ Crear Noticia</a>
+        <a href="<?= base_url('noticias/mis') ?>" class="icono-menu activo">
+            <img src="<?= base_url('img/noticia-icono.png') ?>" alt="Mis Noticias">
+            Mis Noticias
+        </a>
+
+        <a href="<?= base_url('noticias/crear') ?>" class="icono-menu">
+            <img src="<?= base_url('img/crear-icono.png') ?>" alt="Crear Noticia">
+            Crear Noticia
+        </a>
     <?php endif; ?>
 
     <?php if (session()->get('rol_validador')): ?>
         <a href="<?= base_url('noticias/pendientes') ?>">✔ Noticias para validar</a>
     <?php endif; ?>
 
-    <a href="<?= base_url('noticias/configuracion') ?>">⚙ Configuración</a>
+    <a href="<?= base_url('noticias/configuracion') ?>" class="icono-menu">
+        <img src="<?= base_url('img/configuracion-icon.png') ?>" alt="Configuracion">
+        Configuración
+    </a>
 
 </div>
 

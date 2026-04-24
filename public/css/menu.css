@@ -58,3 +58,38 @@
 .overlay.active {
     display: block;
 }
+
+.icono-menu {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    padding: 12px 16px;
+    border-radius: 12px;
+
+    color: white;
+    text-decoration: none;
+
+    transition: background 0.3s ease;
+}
+
+.icono-menu {
+    display: grid;
+    grid-template-columns: 30px 1fr; 
+    align-items: center;
+    gap: 12px;
+
+    padding: 12px 16px;
+    border-radius: 12px;
+
+    color: white;
+    text-decoration: none;
+}
+
+/* icono */
+.icono-menu img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+    justify-self: center; 
+}

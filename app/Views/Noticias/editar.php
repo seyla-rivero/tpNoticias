@@ -2,27 +2,12 @@
 
 <?= $this->section('contenido') ?>
 
-<div style="
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    min-height:80vh;
-">
+<div class="contenedor-editar">
 
-    <div style="
-        background:#d9d9d9;
-        padding:20px 30px 30px 30px;
-        border-radius:10px;
-        width:600px;
-    ">
+    <div class="card-editar">
 
         <!-- TITULO -->
-        <h3 style="
-            margin-top:0;
-            margin-bottom:15px;
-            padding-bottom:10px;
-            border-bottom:1px solid #bbb;
-        ">
+        <h3 class="titulo-editar">
             Editar Noticia
         </h3>
          <!-- ESTADO -->
@@ -36,13 +21,8 @@
             }
         ?>
 
-            <div style="margin-bottom:15px;">
-            <span style="
-                font-size:12px;
-                padding:5px 10px;
-                border-radius:6px;
-                background:<?= $color ?>;
-            ">
+            <div class="estado-contenedor">
+            <span class="estado" style="background:<?= $color ?>">
                 <?= $noticia['estado'] ?>
             </span>
         </div>
@@ -50,56 +30,27 @@
 
             <!-- TITULO -->
             <label><b>Título:</b></label><br>
-            <input type="text" name="titulo" value="<?= $noticia['titulo'] ?>" style="
-                width:100%;
-                padding:10px;
-                border-radius:8px;
-                border:none;
-                box-sizing:border-box;
-                margin-top:5px;
-                margin-bottom:15px;
-            ">
+            <input type="text" name="titulo" value="<?= $noticia['titulo'] ?>"class="input">
 
 
             <!-- DESCRIPCION -->
             <label><b>Descripción:</b></label><br>
-            <textarea name="descripcion" style="
-                width:100%;
-                padding:10px;
-                border-radius:8px;
-                border:none;
-                box-sizing:border-box;
-                margin-top:5px;
-                margin-bottom:15px;
-            "><?= $noticia['descripcion'] ?></textarea>
+            <textarea name="descripcion" class="input"><?= $noticia['descripcion'] ?></textarea>
 
             <!-- IMAGEN -->
             <label><b>Imagen</b></label><br>
 
-            <div style="
-                display:flex;
-                gap:15px;
-                align-items:center;
-                margin-top:10px;
-                margin-bottom:20px;
-            ">
+            <div class="imagen-contenedor-editar">
+            
 
                 <!-- Imagen actual -->
                 <?php if (!empty($noticia['imagen'])): ?>
                    <img id="preview"
                     src="/app_tp1/public/uploads/<?= $noticia['imagen'] ?>" 
-                    style="width:150px; height:150px; object-fit:cover; border-radius:10px;">
+                    class="preview-img-editar">
                         
                 <?php else: ?>
-                    <div style="
-                        width:150px;
-                        height:150px;
-                        background:#ccc;
-                        border-radius:10px;
-                        display:flex;
-                        justify-content:center;
-                        align-items:center;
-                    ">
+                    <div class="sin-imagen-editar">
                         Sin imagen
                     </div>
                 <?php endif; ?>
@@ -111,7 +62,7 @@
             </label>
             <span id="nombreImagen" style="margin-left:10px;"></span>
 
-            <label style="display:flex; align-items:center; gap:5px; margin-top:10px;">
+            <label class="checkbox-editar">
                 <input type="checkbox" name="eliminar_imagen" value="1">
                 Quitar imagen
             </label>
@@ -119,32 +70,24 @@
             </div>
 
             <!-- BOTONES -->
-            <div style="
-                display:flex;
-                justify-content:space-between;
-                align-items:center;
-                margin-top:20px;
-            ">
+            <div class="acciones">
 
-                <a href="/app_tp1/public/noticias/mis" style="text-decoration:none; color:black;">
+                <a href="/app_tp1/public/noticias/mis" class="volver">
                     ← Volver
                 </a>
 
-                <div style="display:flex; gap:10px;">
-
+                 <div class="botones">
                     <button class="btn btn-guardar" type="submit" name="accion" value="guardar">
-                        Guardar cambios
+                    Guardar cambios
                     </button>
 
-                    <form method="post" action="<?= base_url('noticias/cambiarEstado/' . $noticia['id']) ?>">
-                    <button class="btn btn-azul" name="accion" value="validar">
-                        Enviar a Validación
+                    <button class="btn btn-validar" type="submit" name="accion" value="validar">
+                    Enviar a validación
                     </button>
 
-                    <a href="<?= base_url('noticias/mis') ?>" class="btn btn-anular" style="text-decoration:none;">
+                    <a href="<?= base_url('noticias/mis') ?>" class="btn btn-gris" style="text-decoration: none;">
                         Cancelar
                     </a>
-
                 </div>
 
             </div>

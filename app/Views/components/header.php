@@ -9,10 +9,10 @@
             </button>
         <?php endif; ?>
 
-        <div class="logo-container">
+        <a href="<?= base_url('noticias') ?>" class="logo-container">
             <img src="<?= base_url('img/logo-bts.png') ?>" class="logo">
             <span class="logo-text">Portal de Noticias de BTS</span>
-        </div>
+        </a>
 
     </div>
 
@@ -21,7 +21,7 @@
 
     <?php if (session()->get('logueado')): ?>
 
-        <img src="<?= base_url('img/avatar.png') ?>"
+        <img src="<?= base_url('img/avatar-perfil.png') ?>"
              onclick="toggleUserMenu()"
              class="avatar">
 
@@ -29,11 +29,11 @@
 
         <div id="userMenu" class="user-menu">
 
-            <div class="user-menu-text">Sesión iniciada como</div>
+            <!--<div class="user-menu-text">Sesión iniciada como</div>
 
             <div class="user-menu-name">
                 <?= session()->get('nombre') ?>
-            </div>
+            </div>-->
 
             <a href="<?= base_url('logout') ?>" class="logout-btn">
                 Cerrar sesión
@@ -45,7 +45,7 @@
        
         <div onclick="abrirLogin()" class="login-box">
 
-            <img src="<?= base_url('img/avatar.png') ?>" class="avatar">
+            <img src="<?= base_url('img/avatar-perfil.png') ?>" class="avatar">
 
             <span class="login-text">
                 Iniciar sesión

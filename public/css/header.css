@@ -28,6 +28,8 @@
     display: flex;
     align-items: center;
     gap: 15px; 
+    text-decoration: none; 
+    color: inherit; 
 }
 /*Imagen del Logo*/
 .logo {
@@ -58,8 +60,8 @@
 
 /* AVATAR */
 .avatar {
-    width: 35px;
-    height: 35px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     cursor: pointer;
 }
@@ -113,7 +115,7 @@
     justify-content: center;
     padding: 10px;
     text-decoration: none;
-    background: #7e7777;
+    background: linear-gradient(135deg, #7b2ff7, #9f44d3);
     color: white;
     border-radius: 8px;
     font-size: 14px;

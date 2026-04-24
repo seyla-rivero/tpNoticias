@@ -63,6 +63,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 20px;
 }
 
 .botones {
@@ -158,4 +159,68 @@
     transform: translateY(0);
   }
 }
+
+.contenedor-editar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+}
+
+.card-editar {
+    background: #d9d9d9;
+    padding: 20px 30px 30px;
+    border-radius: 10px;
+    width: 600px;
+}
+
+.titulo-editar {
+    margin-top: 0;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #bbb;
+}
+
+.estado-contenedor {
+    margin-bottom: 15px;
+}
+
+.estado {
+    font-size: 12px;
+    padding: 5px 10px;
+    border-radius: 6px;
+}
+
+.imagen-contenedor-editar {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.preview-img-editar {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.sin-imagen-editar {
+    width: 150px;
+    height: 150px;
+    background: #ccc;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.checkbox-editar {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 10px;
+}
+
 
