@@ -39,4 +39,22 @@ function abrirRegistro() {
 function cerrarRegistro() {
     document.getElementById("registroModal").style.display = "none";
 }
+
+window.onload = function() {
+    <?php if (session()->get('success') || session()->get('error')): ?>
+        abrirModalRecuperar();
+    <?php endif; ?>
+}
+
 </script>
+
+<script id="i4f1xr">
+function abrirModalRecuperar() {
+    document.getElementById('modalRecuperar').style.display = 'flex';
+}
+
+function cerrarModalRecuperar() {
+    document.getElementById('modalRecuperar').style.display = 'none';
+}
+
+</script>  

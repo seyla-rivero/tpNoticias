@@ -14,6 +14,8 @@ class UsuarioModel extends Model
         'email',
         'password',
         'rol_editor',
-        'rol_validador'
+        'rol_validador',
+        'reset_token',
+        'reset_expira'
     ];
 }

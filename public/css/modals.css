@@ -12,6 +12,15 @@
     z-index: 3000;
 }
 
+.modal-content {
+    background: #1e1e2f;
+    padding: 30px;
+    border-radius: 12px;
+    width: 350px;
+    color: white;
+    position: relative;
+}
+
 .modal-box {
     background: #f2f2f2;
     padding: 35px 30px;
@@ -118,4 +127,81 @@
     text-align: center;
     margin-top: -10px;
     margin-bottom: 15px;
+}
+
+.input-container {
+    position: relative;
+    width: 100%;
+}
+
+.form-input {
+    width: 100%;
+    padding-right: 45px;
+    height: 45px; 
+    box-sizing: border-box;
+}
+
+.toggle-eye {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-75%);
+    cursor: pointer;
+    color: #555;
+    font-size: 16px; 
+    line-height: 1; 
+}
+
+.forgot-password {
+    text-align: right;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+.forgot-password a {
+    font-size: 13px;
+    color: #7b2cbf; 
+    text-decoration: none;
+}
+
+.forgot-password a:hover {
+    text-decoration: underline;
+}
+
+.reset-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.reset-container .modal-content {
+    background: #1e1e2f;
+    padding: 30px;
+    border-radius: 15px;
+    width: 380px;
+    color: white;
+
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    text-align: center;
+}
+
+.reset-container h2 {
+    margin-bottom: 20px;
+    color: #a855f7; /* violeta */
+}
+
+.reset-container .form-input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+}
+.close {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    cursor: pointer;
+    font-size: 20px;
 }

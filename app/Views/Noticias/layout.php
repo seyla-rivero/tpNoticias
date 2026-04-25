@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="<?= base_url('css/menu.css') ?>">
     <link rel="stylesheet" href="<?= base_url('css/header.css') ?>">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body style="margin:0; font-family: Arial;">
 
@@ -22,10 +23,11 @@
     </div>
     <!-- Modal de Login y Registro-->
     <?= view('components/modals') ?>
+    <?= view('Noticias/recuperar_password') ?>
 
     <!-- Script de Login y Registro-->
     <?= view('components/scripts') ?>
-
+ 
 </body>
 </html>
 
