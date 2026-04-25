@@ -3,10 +3,13 @@
 <?= $this->section('contenido') ?>
 <link rel="stylesheet" href="<?= base_url('css/crear.css') ?>">
 
+<?php if (session()->getFlashdata('success')): ?>
+    <div class="alert-success">
+        <?= session()->getFlashdata('success') ?>
+    </div>
+<?php endif; ?>
 <div class="main-content">
 <div class="crear-container">
-    
-
     <div class="crear-card">
        
         <h3 class="crear-titulo">Crear Noticia</h3>
@@ -38,15 +41,16 @@
 
             <!-- IMAGEN -->
             <div class="bloque-imagen">
-
                 <label>Imagen (Opcional)</label>
 
-                <input type="file" name="imagen" id="imagen">
+                <div id="drop-area">
+                    <p>Arrastrá una imagen acá o hacé click</p>
+                    <input type="file" id="imagen" name="imagen" accept="image/*" hidden>
+                </div>
 
                 <div class="preview-container">
                     <img id="previewImagen">
                 </div>
-
             </div>
 
             <!-- BOTONES -->
@@ -105,21 +109,59 @@ document.getElementById("formNoticia").addEventListener("submit", function(e) {
   }
 });
 
-document.getElementById('imagen').addEventListener('change', function(e) {
-     const file = e.target.files[0];
-    const preview = document.getElementById('previewImagen');
+// DRAG & DROP + PREVIEW
+const dropArea = document.getElementById("drop-area");
+const input = document.getElementById("imagen");
+const preview = document.getElementById("previewImagen");
 
-    if (file) {
-        const reader = new FileReader();
+// Click abre selector
+dropArea.addEventListener("click", () => input.click());
 
-        reader.onload = function(e) {
-            preview.src = e.target.result;
-            preview.style.display = 'block';
-        }
+// Selección normal
+input.addEventListener("change", (e) => {
+  mostrarImagen(e.target.files[0]);
+});
 
-        reader.readAsDataURL(file);
-    }
-}); 
-</script>        
+// Drag encima
+dropArea.addEventListener("dragover", (e) => {
+  e.preventDefault();
+  dropArea.classList.add("activo");
+});
+
+// Sale del área
+dropArea.addEventListener("dragleave", () => {
+  dropArea.classList.remove("activo");
+});
+
+// Soltar archivo
+dropArea.addEventListener("drop", (e) => {
+  e.preventDefault();
+  dropArea.classList.remove("activo");
+
+  const archivo = e.dataTransfer.files[0];
+  input.files = e.dataTransfer.files; // importante para el form
+
+  mostrarImagen(archivo);
+});
+
+// Función única de preview
+function mostrarImagen(file) {
+  if (!file || !file.type.startsWith("image/")) return;
+
+  if (file.size > 2 * 1024 * 1024) {
+    alert("La imagen es demasiado grande (máx 2MB)");
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    preview.src = e.target.result;
+    preview.style.display = "block";
+  };
+  reader.readAsDataURL(file);
+}
+
+
+</script>    
 
 <?= $this->endSection() ?>

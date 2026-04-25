@@ -191,7 +191,11 @@ private function verificarExpiracion()
         ]);
     }
 
-    return redirect()->to('/noticias');
+    if ($id) {
+        return redirect()->to('/noticias')->with('success', 'Noticia actualizada con éxito');
+    } else {
+        return redirect()->to('/noticias')->with('success', 'Noticia creada con éxito');
+    }
 }
     public function cambiarEstado($id)
 {

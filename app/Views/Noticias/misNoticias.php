@@ -1,8 +1,10 @@
 <?= $this->extend('Noticias/layout') ?>
 
 <?= $this->section('contenido') ?>
+
 <div class="main-content">
 <h1 style="margin-bottom:20px;">Mis Noticias</h1>
+
 
 <form method="get" style="margin-bottom:20px; display:flex; gap:10px;">
 
@@ -186,5 +188,6 @@
 
 </div>
 </div>
+
 
 <?= $this->endSection() ?>
