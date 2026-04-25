@@ -4,11 +4,6 @@ $emailError = $validation ? $validation->getError('email') : null;
 $passwordError = $validation ? $validation->getError('password') : null;
 ?>
 
-<?php if (session()->getFlashdata('error_login') && !$emailError && !$passwordError): ?>
-    <div class="error-text">
-        <?= session()->getFlashdata('error_login') ?>
-    </div>
-<?php endif; ?>
 <form method="post" action="<?= site_url('login') ?>">
     <?= csrf_field() ?>
 
@@ -23,19 +18,25 @@ $passwordError = $validation ? $validation->getError('password') : null;
     <div class="input-container">
         <input type="password" id="loginPassword" name="password" placeholder="Contraseña"  class="form-input">
             <i class="fa-solid fa-eye toggle-eye" onclick="togglePassword('loginPassword',  this)"></i>
-    </div>  
-    
-    <div class="forgot-password">
-        <a href="#" onclick="abrirModalRecuperar(); return false;">
-            ¿Olvidaste la contraseña?
-        </a>
-    </div>      
             <?php if ($validation && $validation->getError('password')): ?>
                 <div class="error-text">
                     <?= $validation->getError('password') ?>
                 </div>
             <?php endif; ?>
 
+            <?php if (session()->getFlashdata('error_login') && !$emailError && !$passwordError): ?>
+                <div class="error-text">
+                    <?= session()->getFlashdata('error_login') ?>
+                </div>
+            <?php endif; ?>
+    </div>  
+    
+    <div class="forgot-password">
+        <a href="#" onclick="abrirModalRecuperar(); return false;">
+            ¿Olvidaste tu contraseña?
+        </a>
+    </div>      
+           
     <button type="submit" class="btn-modal btn-primario">
         Ingresar
     </button>

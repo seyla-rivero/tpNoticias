@@ -46,17 +46,17 @@
     <span class="roles-title">Roles:</span>
 
     <label class="roles-label">
-        <input type="checkbox" name="rol_editor" value="1" >
+       <input type="radio" name="rol" value="editor" <?= old('rol') == 'editor' ? 'checked' : '' ?>>
         Editor
     </label>
 
     <label class="roles-label">
-        <input type="checkbox" name="rol_validador" value="1" >
+        <input type="radio" name="rol" value="validador" <?= old('rol') == 'validador' ? 'checked' : '' ?>>
         Validador
     </label>
 
     <label class="roles-label">
-        <input type="checkbox" name="rol_ambos" value="1" >
+       <input type="radio" name="rol" value="ambos" <?= old('rol') == 'ambos' ? 'checked' : '' ?>>
         Editor y Validador
     </label>
     
@@ -74,38 +74,6 @@
 
 </form>
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-
-    const editor = document.querySelector('input[name="rol_editor"]');
-    const validador = document.querySelector('input[name="rol_validador"]');
-    const ambos = document.querySelector('input[name="rol_ambos"]');
-
-    // Si marca "ambos"
-    ambos.addEventListener('change', function () {
-
-        if (ambos.checked) {
-            editor.checked = false;
-            validador.checked = false;
-        }
-
-    });
-
-    // Si marca editor o validador
-    editor.addEventListener('change', function () {
-        if (editor.checked) {
-            ambos.checked = false;
-        }
-    });
-
-    validador.addEventListener('change', function () {
-        if (validador.checked) {
-            ambos.checked = false;
-        }
-    });
-
-});
-
-
 function togglePassword(id, icon) {
     const input = document.getElementById(id);
 
@@ -119,5 +87,4 @@ function togglePassword(id, icon) {
         icon.classList.add("fa-eye");
     }
 }
-
 </script>

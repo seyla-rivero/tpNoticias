@@ -51,36 +51,47 @@ class Autenticacion extends BaseController
 
     $model = new UsuarioModel();
 
-        // Obtener roles
-        $rol_editor = $this->request->getPost('rol_editor') ? 1 : 0;
-        $rol_validador = $this->request->getPost('rol_validador') ? 1 : 0;
-        $rol_ambos = $this->request->getPost('rol_ambos');
+        $rol = $this->request->getPost('rol');
 
-        // Si selecciona "ambos"
-        if ($rol_ambos) {
+        if (!$rol) {
+            return redirect()->back()
+                ->withInput()
+                ->with('error_roles', 'Debe seleccionar un rol')
+                ->with('modal', 'registro');
+        }
+        $rol_editor = 0;
+        $rol_validador = 0;
+
+        // Convertir a flags como ya usabas
+        if ($rol == 'editor') {
+            $rol_editor = 1;
+            $rol_validador = 0;
+        } elseif ($rol == 'validador') {
+            $rol_editor = 0;
+            $rol_validador = 1;
+        } elseif ($rol == 'ambos') {
             $rol_editor = 1;
             $rol_validador = 1;
         }
 
-        if ($rol_editor == 0 && $rol_validador == 0) {
-        return redirect()->back()
-            ->withInput()
-            ->with('error_roles', 'Debe seleccionar al menos un rol')
-            ->with('modal', 'registro');
-}
+        $nombre = $this->request->getPost('nombre');
+        $email = $this->request->getPost('email');
+        $password = $this->request->getPost('password');
 
-
-        // Guardar usuario
-        $id = $model->insert([
-            'nombre' => $this->request->getPost('nombre'),
-            'email' => $this->request->getPost('email'),
-            'password' => password_hash(
-                $this->request->getPost('password'),
-                PASSWORD_DEFAULT
-            ),
+            $id = $model->insert([
+            'nombre' => $nombre,
+            'email' => $email,
+            'password' => password_hash($password, PASSWORD_DEFAULT),
             'rol_editor' => $rol_editor,
             'rol_validador' => $rol_validador
         ]);
+
+        if (!$id) {
+        return redirect()->back()
+            ->withInput()
+            ->with('error_general', 'Error al registrar usuario')
+            ->with('modal', 'registro');
+        }
 
         $usuario = $model->find($id);
 
@@ -247,9 +258,21 @@ public function resetPassword()
     $model = new UsuarioModel();
 
     $rules = [
-        'password' => 'required|min_length[6]',
-        'confirmar' => 'required|matches[password]'
-    ];
+    'password' => [
+        'rules' => 'required|min_length[6]',
+        'errors' => [
+            'required'   => 'La contraseña es obligatoria',
+            'min_length' => 'La contraseña debe tener al menos 6 caracteres'
+        ]
+    ],
+    'confirmar' => [
+        'rules' => 'required|matches[password]',
+        'errors' => [
+            'required' => 'Confirmá la contraseña',
+            'matches'  => 'Las contraseñas no coinciden'
+        ]
+    ]
+];
 
     if (!$this->validate($rules)) {
         return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
