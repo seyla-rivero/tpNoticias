@@ -3,12 +3,7 @@
 <?= $this->section('contenido') ?>
 <link rel="stylesheet" href="<?= base_url('css/crear.css') ?>">
 
-<?php if (session()->getFlashdata('success')): ?>
-    <div class="alert-success">
-        <?= session()->getFlashdata('success') ?>
-    </div>
-<?php endif; ?>
-<div class="main-content">
+<!--<div class="main-content">-->
 <div class="crear-container">
     <div class="crear-card">
        
@@ -89,7 +84,7 @@
     </div>
       
 </div>
-</div>
+<!--</div>-->
 <script>
 function mostrarModal() {
   document.getElementById("modalError").style.display = "flex";
@@ -160,7 +155,6 @@ function mostrarImagen(file) {
   };
   reader.readAsDataURL(file);
 }
-
 
 </script>    
 

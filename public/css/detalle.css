@@ -2,14 +2,16 @@
 .detalle-container {
     display: flex;
     justify-content: center;
-    margin-top: 40px;
+    margin-top: 50px;
 }
 
 .detalle-card {
     width: 800px;
-    background: #d9d9d9;
-    border-radius: 12px;
-    padding: 20px;
+    background: #f5f0ff; /* violeta suave */
+    border-radius: 18px;
+    padding: 25px;
+    box-shadow: 0 8px 20px rgba(123, 44, 191, 0.15);
+    backdrop-filter: blur(6px);
 }
 
 /* HEADER */
@@ -17,6 +19,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 10px;
 }
 
 .detalle-header h2 {
@@ -25,15 +28,18 @@
 
 /* BOTON HISTORIAL */
 .btn-historial {
-    background-color: #007bff;
+    background: #7b2cbf;
     color: white;
-    padding: 8px 12px;
-    border-radius: 5px;
+    padding: 8px 14px;
+    border-radius: 10px;
     text-decoration: none;
+    font-size: 14px;
+    transition: 0.2s;
+    white-space: nowrap; /* evita que baje de línea */
 }
 
 .btn-historial:hover {
-    background-color: #0056b3;
+    background: #5a189a;
 }
 
 /* ESTADO */
@@ -42,19 +48,20 @@
 }
 
 .detalle-estado span {
-    padding: 6px 12px;
-    border-radius: 8px;
+    padding: 6px 14px;
+    border-radius: 20px;
     font-size: 13px;
-    font-weight: 500;
+    font-weight: 600;
+    display: inline-block;
 }
 
 /* INFO */
 .detalle-info {
     margin-top: 15px;
-    padding-top: 10px;
-    border-top: 1px solid #bbb;
+    padding-top: 12px;
+    border-top: 1px solid #e0d7ff;
     font-size: 14px;
-    color: #555;
+    color: #6b5c8f;
     display: flex;
     gap: 20px;
 }
@@ -63,8 +70,9 @@
 .detalle-img {
     margin-top: 20px;
     background: white;
-    border-radius: 10px;
+    border-radius: 14px;
     overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
 .detalle-img img {
@@ -82,7 +90,9 @@
 /* DESCRIPCION */
 .detalle-descripcion {
     margin-top: 20px;
-    font-size: 14px;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #333;
 }
 
 /* Botones */
@@ -94,7 +104,11 @@
 
 .detalle-volver {
     text-decoration: none;
-    color: black;
+    color: #7b2cbf;
+    font-weight: 500;
+}
+.detalle-volver:hover {
+    text-decoration: underline;
 }
 
 .detalle-acciones {

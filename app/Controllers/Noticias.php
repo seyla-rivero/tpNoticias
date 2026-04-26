@@ -133,7 +133,7 @@ private function verificarExpiracion()
     }
 
     // 🔹 Imagen
-    $eliminarImagen = $this->request->getPost('eliminar_imagen');
+    $eliminarImagen = $this->request->getPost('quitar_imagen');
     $imagen = $this->request->getFile('imagen');
     $nombreImagen = $noticiaActual['imagen'] ?? null;
 
@@ -169,10 +169,11 @@ private function verificarExpiracion()
 
     // 🔹 Si hay ID → actualizar
     if ($id) {
-        $data['id'] = $id;
+       $model->update($id, $data);
+    } else {
+        $model->insert($data);
     }
 
-    $model->save($data);
     $historialModel = new HistorialModel();
 
     // Obtener estado anterior

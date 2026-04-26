@@ -41,10 +41,18 @@ function cerrarRegistro() {
 }
 
 window.onload = function() {
-    <?php if (session()->get('success') || session()->get('error')): ?>
+    <?php if (session()->getFlashdata('recuperar')): ?>
         abrirModalRecuperar();
     <?php endif; ?>
 }
+
+setTimeout(() => {
+    const toast = document.querySelector('.toast-success');
+    if (toast) {
+        toast.style.opacity = '0';
+        setTimeout(() => toast.remove(), 300);
+    }
+}, 3000);
 
 </script>
 

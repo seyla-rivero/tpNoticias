@@ -3,15 +3,13 @@
 <?= $this->section('contenido') ?>
 
 <div class="main-content">
-<h1 style="margin-bottom:20px;">Mis Noticias</h1>
+<h1 class="titulo-seccion">Mis Noticias</h1>
 
 
-<form method="get" style="margin-bottom:20px; display:flex; gap:10px;">
+<form method="get" class="filtro-form">
 
     <!-- FILTRO ESTADO -->
-    <select name="estado"
-        onchange="this.form.submit()"
-        style="padding:8px; border-radius:8px;">
+    <select name="estado" onchange="this.form.submit()" class="filtro-select">
 
     <option value=""
         <?= ($estado ?? '') == '' ? 'selected' : '' ?>>
@@ -52,19 +50,10 @@
 
 </form>
 
-<div style="
-    background:#eee;
-    padding:20px;
-    border-radius:12px;
-">
+<div class="tabla-noticias">
 
     <!-- CABECERA -->
-    <div style="
-        display:flex;
-        font-weight:bold;
-        margin-bottom:10px;
-        color:#555;
-    ">
+    <div class="tabla-header">
         <div style="flex:2;">Título</div>
         <div style="flex:1;">Estado</div>
         <div style="flex:1;">Creación</div>
@@ -73,53 +62,39 @@
 
     <?php foreach ($noticias as $noticia): ?>
 
-        <div style="
-            background:white;
-            padding:15px;
-            margin-bottom:10px;
-            border-radius:10px;
-            display:flex;
-            align-items:center; 
-        ">
+        <div  class="noticia-item">
 
             <!-- TITULO -->
-            <div style="flex:2; font-weight:600;">
+            <div class="col-titulo">
                 <?= $noticia['titulo'] ?>
             </div>
 
             <!-- ESTADO -->
-            <div style="flex:1;">
+            <div class="col-estado">
                 <?php
-                    $color = "#eee";
+                    $claseEstado = match($noticia['estado']) {
+                        'Borrador' => 'estado-borrador',
+                        'Lista para Validación' => 'estado-validacion',
+                        'Publicada' => 'estado-publicada',
+                        'Para Corrección' => 'estado-correccion',
+                        'Anulada' => 'estado-anulada',
+                        'Expirada' => 'estado-expirada',
+                        default => ''
+                    };
+                    ?>
 
-                    switch ($noticia['estado']) {
-                        case 'Borrador': $color = "#fff3cd"; break;
-                        case 'Lista para Validación': $color = "#dbeafe"; break;
-                        case 'Publicada': $color = "#c8e6c9"; break;
-                        case 'Para Corrección': $color = "#f0a05e"; break;
-                        case 'Anulada': $color = "#f5c6cb"; break;
-                        case 'Expirada': $color = "#d6d8db"; break;
-                    }
-                ?>
-
-                <span style="
-                    background:<?= $color ?>;
-                    padding:6px 12px;
-                    border-radius:8px;
-                    font-size:13px;
-                    font-weight:500;
-                ">
-                    <?= $noticia['estado'] ?>
-                </span>
+                    <span class="estado-badge <?= $claseEstado ?>">
+                        <?= $noticia['estado'] ?>
+                    </span>
             </div>
 
             <!-- FECHA -->
-            <div style="flex:1; color:#777;">
+            <div class="col-fecha">
                 <?= date('d/m/Y', strtotime($noticia['fecha_creacion'])) ?>
             </div>
 
             <!-- BOTON -->
-        <div style="flex:2; display:flex; gap:8px; justify-content:flex-end;">
+        <div class="col-acciones">
     <?php if (session()->get('rol_editor')): ?>
 
     <?php if ($noticia['estado'] == 'Borrador'): ?>

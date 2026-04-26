@@ -1,0 +1,146 @@
+.titulo-seccion {
+    margin-bottom: 20px;
+}
+.filtro-form {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.filtro-select {
+    padding: 8px 12px;
+    border-radius: 10px;
+    border: 1px solid #d4c4ff;
+    background: #f8f5ff;
+    color: #4b2ca3;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.filtro-select:focus {
+    outline: none;
+    border-color: #7b2cbf;
+    box-shadow: 0 0 0 2px rgba(123, 44, 191, 0.2);
+}
+
+.tabla-noticias {
+    background: #f5f0ff; /* violeta muy suave */
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(123, 44, 191, 0.1);
+}
+
+.tabla-header {
+    display: flex;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #5a4b81; /* violeta oscuro suave */
+}
+
+.noticia-item {
+    background: #ffffff;
+    padding: 15px;
+    margin-bottom: 12px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    transition: 0.2s;
+    border: 1px solid #ece4ff;
+}
+.noticia-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(123, 44, 191, 0.15);
+}
+
+.col-titulo {
+    flex: 2;
+    font-weight: 600;
+}
+
+.col-estado {
+    flex: 1;
+}
+
+.col-fecha {
+    flex: 1;
+    color: #777;
+}
+
+.col-acciones {
+    flex: 2;
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+}
+
+.estado-badge {
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* colores */
+.estado-borrador { background: #fff3cd; }
+.estado-validacion { background: #dbeafe; }
+.estado-publicada { background: #c8e6c9; }
+.estado-correccion { background: #f0a05e; }
+.estado-anulada { background: #f5c6cb; }
+.estado-expirada { background: #d6d8db; }
+
+.sin-permisos {
+    color: #999;
+    font-size: 12px;
+}
+
+
+.timeline-estado {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+}
+.timeline-dot {
+    position: absolute;
+    left: -1px;
+    top: 10px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 3px solid #f5f0ff;
+}
+
+.timeline-card:hover {
+    transform: translateY(-2px);
+}
+.timeline-header span {
+    font-size: 13px;
+    color: #8a7bbd;
+}
+.timeline-item {
+    animation: fadeInUp 0.3s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.timeline-avatar{
+    width:35px;
+    height:35px;
+    border-radius:50%;
+    background:#ddd;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:14px;
+    font-weight:bold;
+}

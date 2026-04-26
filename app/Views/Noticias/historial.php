@@ -2,7 +2,7 @@
 <?= $this->section('contenido') ?>
 
 <div class="main-content">
-<h2 style="color:white;">Historial de la Noticia</h2>
+<h2 class="titulo-seccion">Historial de la Noticia</h2>
 
 
 <?php
@@ -46,17 +46,7 @@ function iconoEstado($estado) {
             <div class="timeline-header">
 
             <div style="display:flex; align-items:center; gap:10px;">
-                <div style="
-                    width:35px;
-                    height:35px;
-                    border-radius:50%;
-                    background:#ddd;
-                    display:flex;
-                    align-items:center;
-                    justify-content:center;
-                    font-size:14px;
-                    font-weight:bold;
-                ">
+                <div class="timeline-avatar">
                     <?= strtoupper(substr($h['nombre'], 0, 1)) ?>
                 </div>
 

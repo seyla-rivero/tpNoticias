@@ -3,7 +3,7 @@
 
 <div class="main-content">
 
-    <h2 class="titulo-config">Configuración</h2>
+    <h2 class="titulo-seccion">Configuración</h2>
 
     <?php if(session()->getFlashdata('success')): ?>
     <div class="alert-success">

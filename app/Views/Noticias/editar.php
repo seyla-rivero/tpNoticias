@@ -2,12 +2,12 @@
 
 <?= $this->section('contenido') ?>
 
-<div class="contenedor-editar">
+<div class="crear-container">
 
-    <div class="card-editar">
+    <div class="crear-card">
 
         <!-- TITULO -->
-        <h3 class="titulo-editar">
+        <h3 class="crear-titulo">
             Editar Noticia
         </h3>
          <!-- ESTADO -->
@@ -39,35 +39,39 @@
 
             <!-- IMAGEN -->
             <label><b>Imagen</b></label><br>
+            <div class="bloque-imagen">
 
-            <div class="imagen-contenedor-editar">
-            
+            <!-- Preview (solo si hay imagen) -->
+            <?php if (!empty($noticia['imagen'])): ?>
+                <div class="preview-container">
+                    <img id="previewImagen"
+                        src="<?= base_url('uploads/' . $noticia['imagen']) ?>">
+                </div>
+            <?php else: ?>
+                <div class="preview-container">
+                    <img id="previewImagen" style="display:none;">
+                </div>
+            <?php endif; ?>
 
-                <!-- Imagen actual -->
-                <?php if (!empty($noticia['imagen'])): ?>
-                   <img id="preview"
-                    src="/app_tp1/public/uploads/<?= $noticia['imagen'] ?>" 
-                    class="preview-img-editar">
-                        
-                <?php else: ?>
-                    <div class="sin-imagen-editar">
-                        Sin imagen
-                    </div>
-                <?php endif; ?>
+            <!-- Botones SIEMPRE -->
+            <div style="margin-top:10px;">
 
-                <!-- Botón cambiar imagen -->
-            <label class="btn btn-validar" style="cursor:pointer;">
-                Cambiar imagen
-                <input type="file" name="imagen" style="display:none;">
-            </label>
-            <span id="nombreImagen" style="margin-left:10px;"></span>
+                <label for="inputImagen" class="btn btn-validar">
+                    Cambiar imagen
+                </label>
 
-            <label class="checkbox-editar">
-                <input type="checkbox" name="eliminar_imagen" value="1">
-                Quitar imagen
-            </label>
+                <label class="checkbox-editar">
+                    <input type="checkbox" name="quitar_imagen">
+                    Quitar imagen
+                </label>
 
             </div>
+
+            <!-- Input -->
+            <input type="file" id="inputImagen" name="imagen" hidden>
+
+        </div>
+           
 
             <!-- BOTONES -->
             <div class="acciones">
@@ -98,42 +102,58 @@
 
 </div>
 <script>
+document.addEventListener('DOMContentLoaded', function() {    
 // 🔹 Preview cuando selecciona imagen
-document.querySelector('input[name="imagen"]').addEventListener('change', function(e) {
-    if (e.target.files.length > 0) {
-        const file = e.target.files[0];
+document.getElementById('inputImagen').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (!file) return;
 
-        // mostrar nombre
-        document.getElementById('nombreImagen').innerText = file.name;
+    const preview = document.getElementById('previewImagen');
 
-        // sacar el check de "eliminar imagen" si estaba marcado
-        const checkEliminar = document.querySelector('input[name="eliminar_imagen"]');
-        if (checkEliminar) {
-            checkEliminar.checked = false;
-        }
-
-        // preview
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            document.getElementById('preview').src = e.target.result;
-        }
-        reader.readAsDataURL(file);
+    // si no existe el img (caso sin imagen previa), lo creamos
+    if (!preview) {
+        const img = document.createElement('img');
+        img.id = 'previewImagen';
+        img.style.maxWidth = '100%';
+        img.style.marginTop = '10px';
+        document.querySelector('.preview-container')?.appendChild(img);
     }
+
+    // actualizar preview
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        document.getElementById('previewImagen').src = e.target.result;
+        document.getElementById('previewImagen').style.display = 'block';
+    }
+    reader.readAsDataURL(file);
+
+    // desmarcar "quitar imagen"
+    const check = document.querySelector('input[name="quitar_imagen"]');
+    if (check) check.checked = false;
 });
+
 
 // 🔹 Si marca "quitar imagen"
-document.querySelector('input[name="eliminar_imagen"]').addEventListener('change', function(e) {
-    if (e.target.checked) {
-        // borrar preview
-        document.getElementById('preview').src = '';
+const checkEliminar = document.querySelector('input[name="quitar_imagen"]');
 
-        // limpiar input file
-        document.querySelector('input[name="imagen"]').value = '';
+if (checkEliminar) {
+    checkEliminar.addEventListener('change', function(e) {
 
-        // limpiar nombre
-        document.getElementById('nombreImagen').innerText = '';
-    }
+        const preview = document.getElementById('previewImagen');
+
+        if (e.target.checked) {
+            if (preview) preview.style.opacity = "0.3";
+
+            // limpiar input file
+            document.getElementById('inputImagen').value = '';
+        } else {
+            if (preview) preview.style.opacity = "1";
+        }
+
+    });
+}
 });
 </script>
+
 
 <?= $this->endSection() ?>

@@ -243,8 +243,9 @@ class Autenticacion extends BaseController
     ");
 
     if ($emailService->send()) {
-        return redirect()->back()
-            ->with('success', 'Te enviamos un correo con instrucciones');
+       return redirect()->back()
+    ->with('recuperar', true)
+    ->with('success', 'Te enviamos un correo con instrucciones');
     } else {
         // 🔴 Mostrar error real (solo para desarrollo)
 

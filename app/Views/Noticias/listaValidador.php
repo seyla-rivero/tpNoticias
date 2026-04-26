@@ -3,63 +3,39 @@
 <?= $this->section('contenido') ?>
 <div class="main-content">
 
- <h1 style="margin-bottom:20px;">Noticias para Validar</h1>
+ <h1 class="titulo-seccion">Noticias para Validar</h1>
 
-<div style="
-    background:#eee;
-    padding:20px;
-    border-radius:12px;
-">
+<div class="tabla-noticias">
 
     <!-- CABECERA -->
-    <div style="
-        display:flex;
-        font-weight:bold;
-        margin-bottom:10px;
-        color:#555;
-    ">
+    <div class="tabla-header">
         <div style="flex:2;">Título</div>
         <div style="flex:1;">Estado</div>
         <div style="flex:1;">Creación</div>
-        <div style="width:220px;"></div>
+        <div style="flex:2; text-align:right;">Acciones</div>
     </div>
 
     <?php foreach ($noticias as $noticia): ?>
 
-        <div style="
-            background:white;
-            padding:15px;
-            margin-bottom:10px;
-            border-radius:10px;
-            display:flex;
-            align-items:center;
-        ">
+        <div class="noticia-item">
 
             <!-- TITULO -->
-            <div style="flex:2; font-weight:600;">
+            <div class="col-titulo">
                 <?= $noticia['titulo'] ?>
             </div>
 
             <!-- ESTADO -->
-            <div style="flex:1;">
-                <span style="
-                    background:#dbeafe;
-                    padding:6px 12px;
-                    border-radius:8px;
-                    font-size:13px;
-                    font-weight:500;
-                ">
-                    <?= $noticia['estado'] ?>
-                </span>
+            <div class="col-estado">
+                <span style=" background:#dbeafe; padding:6px 12px; border-radius:8px; font-size:13px; font-weight:500; "> <?= $noticia['estado'] ?> </span>
             </div>
 
             <!-- FECHA -->
-            <div style="flex:1; color:#777;">
+            <div class="col-fecha">
                 <?= date('d/m/Y', strtotime($noticia['fecha_creacion'])) ?>
             </div>
 
             <!-- BOTONES -->
-            <div style="width:220px; text-align:right; display:flex; gap:5px; justify-content:flex-end;">
+            <div class="col-acciones">
 
             <?php if (session()->get('rol_validador')): ?>
 
@@ -85,7 +61,7 @@
                 <?php else: ?>
 
                 <!-- Si no es validador -->
-                <span style="color:#999; font-size:12px;">Sin permisos</span>
+                <span class="sin-permisos">Sin permisos</span>
 
             <?php endif; ?>
 

@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="<?= base_url('css/modals.css') ?>">
     <link rel="stylesheet" href="<?= base_url('css/menu.css') ?>">
     <link rel="stylesheet" href="<?= base_url('css/header.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('css/misNoticias.css') ?>">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
@@ -27,6 +28,12 @@
 
     <!-- Script de Login y Registro-->
     <?= view('components/scripts') ?>
+
+    <?php if (session()->getFlashdata('success')): ?>
+    <div class="toast-success">
+        <?= session()->getFlashdata('success') ?>
+    </div>
+    <?php endif; ?>
  
 </body>
 </html>
