@@ -159,13 +159,17 @@ private function verificarExpiracion()
     }
 
     // 🔹 Datos
-    $data = [
-        'titulo' => $titulo,
-        'descripcion' => $this->request->getPost('descripcion'),
-        'estado' => $estado,
-        'imagen' => $nombreImagen,
-        'autor_id' => session()->get('id')
-    ];
+        $data = [
+            'titulo' => $titulo,
+            'descripcion' => $this->request->getPost('descripcion'),
+            'estado' => $estado,
+            'imagen' => $nombreImagen
+        ];
+
+        // 🔥 SOLO al crear
+        if (!$id) {
+            $data['autor_id'] = session()->get('id');
+        }
 
     // 🔹 Si hay ID → actualizar
     if ($id) {
