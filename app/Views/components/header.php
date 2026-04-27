@@ -1,6 +1,6 @@
 <div class="header">
 
-    <!-- IZQUIERDA -->
+    <!-- Lado izquierdo -->
     <div class="header-left">
         
         <?php if (session()->get('logueado')): ?>
@@ -16,24 +16,15 @@
 
     </div>
 
-    <!-- DERECHA -->
+    <!-- Lado derecho -->
     <div class="header-right">
 
     <?php if (session()->get('logueado')): ?>
 
-        <img src="<?= base_url('img/avatar-perfil.png') ?>"
-             onclick="toggleUserMenu()"
-             class="avatar">
-
+        <img src="<?= base_url('img/avatar-perfil.png') ?>"onclick="toggleUserMenu()" class="avatar">
         <span class="user-name"><?= session()->get('nombre') ?></span>
 
         <div id="userMenu" class="user-menu">
-
-            <!--<div class="user-menu-text">Sesión iniciada como</div>
-
-            <div class="user-menu-name">
-                <?= session()->get('nombre') ?>
-            </div>-->
 
             <a href="<?= base_url('logout') ?>" class="logout-btn">
                 Cerrar sesión

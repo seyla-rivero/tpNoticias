@@ -21,13 +21,13 @@ function colorEstado($estado) {
 <?php
 function iconoEstado($estado) {
     return match($estado) {
-        'Creada' => '🆕',
-        'Borrador' => '📝',
-        'Lista para Validación' => '📤',
-        'Para Corrección' => '✏️',
-        'Publicada' => '✅',
-        'Anulada' => '❌',
-        default => '•'
+        'Creada' => '<img src="' . base_url('img/creada.png') . '" width="12">',
+        'Borrador' => '<img src="' . base_url('img/borrador.png') . '" width="12">',
+        'Lista para Validación' => '<img src="' . base_url('img/validacion.png') . '" width="12">',
+        'Para Corrección' => '<img src="' . base_url('img/correccion.png') . '" width="12">',
+        'Publicada' => '<img src="' . base_url('img/publicado.png') . '" width="12">',
+        'Anulada' => '<img src="' . base_url('img/anulado.png') . '" width="12">',
+        default => '<img src="' . base_url('img/punto.png') . '" width="12">',
     };
 }
 ?>
@@ -37,10 +37,8 @@ function iconoEstado($estado) {
 
     <div class="timeline-item">
 
-        <!-- circulito -->
         <div class="timeline-dot" style="background: <?= colorEstado($h['estado_nuevo']) ?>;"></div>
 
-        <!-- tarjeta -->
         <div class="timeline-card">
 
             <div class="timeline-header">
@@ -54,12 +52,10 @@ function iconoEstado($estado) {
             </div>
 
             <span><?= date('d M Y - H:i', strtotime($h['fecha'])) ?></span>
-
         </div>
 
             <div class="timeline-estado">
 
-                <!-- estado anterior -->
                 <span style="
                     background: <?= colorEstado($h['estado_anterior']) ?>20;
                     color: <?= colorEstado($h['estado_anterior']) ?>;
@@ -70,9 +66,8 @@ function iconoEstado($estado) {
                     <?= iconoEstado($h['estado_anterior']) ?> <?= $h['estado_anterior'] ?>
                 </span>
 
-                →
+                <img src="<?= base_url('img/flecha-historial.png') ?>" width="12">
 
-                <!-- estado nuevo -->
                 <span style="
                     background: <?= colorEstado($h['estado_nuevo']) ?>20;
                     color: <?= colorEstado($h['estado_nuevo']) ?>;

@@ -8,7 +8,6 @@
 
 <form method="get" class="filtro-form">
 
-    <!-- FILTRO ESTADO -->
     <select name="estado" onchange="this.form.submit()" class="filtro-select">
 
     <option value=""
@@ -52,7 +51,6 @@
 
 <div class="tabla-noticias">
 
-    <!-- CABECERA -->
     <div class="tabla-header">
         <div style="flex:2;">Título</div>
         <div style="flex:1;">Estado</div>
@@ -64,7 +62,6 @@
 
         <div  class="noticia-item">
 
-            <!-- TITULO -->
             <div class="col-titulo">
                 <?= $noticia['titulo'] ?>
             </div>
@@ -88,78 +85,76 @@
                     </span>
             </div>
 
-            <!-- FECHA -->
             <div class="col-fecha">
                 <?= date('d/m/Y', strtotime($noticia['fecha_creacion'])) ?>
             </div>
 
-            <!-- BOTON -->
-        <div class="col-acciones">
-    <?php if (session()->get('rol_editor')): ?>
+            <div class="col-acciones">
+            <?php if (session()->get('rol_editor')): ?>
 
-    <?php if ($noticia['estado'] == 'Borrador'): ?>
+                <?php if ($noticia['estado'] == 'Borrador'): ?>
 
-        <form method="post" action="<?= base_url('noticias/detalle/' .  $noticia['id']) ?>"> <button class="btn btn-azuloscuro" name="accion" value="ver">
-                Ver detalle
-            </button>
-        </form>  
+                    <form method="post" action="<?= base_url('noticias/detalle/' .  $noticia['id']) ?>"> <button class="btn btn-azuloscuro" name="accion" value="ver">
+                            Ver detalle
+                        </button>
+                    </form>  
 
-        <form method="post" action="<?= base_url('noticias/editar/' . $noticia['id']) ?>">
-            <button class="btn btn-gris" name="accion" value="editar">
-                Editar
-            </button>
-        </form>   
+                    <form method="post" action="<?= base_url('noticias/editar/' . $noticia['id']) ?>">
+                        <button class="btn btn-gris" name="accion" value="editar">
+                            Editar
+                        </button>
+                    </form>   
 
-        <form method="post" action="<?= base_url('noticias/cambiarEstado/' . $noticia['id']) ?>">
-            <button class="btn btn-azul" name="accion" value="validar">
-                Enviar a Validación
-            </button>
+                    <form method="post" action="<?= base_url('noticias/cambiarEstado/' . $noticia['id']) ?>">
+                        <button class="btn btn-azul" name="accion" value="validar">
+                            Enviar a Validación
+                        </button>
 
-        </form>
+                    </form>
 
-         <form method="post"  action="<?= base_url('noticias/cambiarEstado/' . $noticia['id']) ?>">
-            <button class="btn btn-rojo" name="accion" value="anular">
-                Anular
-            </button>
-        </form>
+                    <form method="post"  action="<?= base_url('noticias/cambiarEstado/' . $noticia['id']) ?>">
+                        <button class="btn btn-rojo" name="accion" value="anular">
+                            Anular
+                        </button>
+                    </form>
 
-    <?php elseif ($noticia['estado'] == 'Para Corrección'): ?>
+                <?php elseif ($noticia['estado'] == 'Para Corrección'): ?>
 
-         <form method="post" action="<?= base_url('noticias/editar/' . $noticia['id']) ?>">
-            <button class="btn btn-gris" name="accion" value="editar">
-                Editar
-            </button>
-        </form>   
-            <!-- REENVIAR A VALIDACIÓN -->
-        <form method="post" action="<?= base_url('noticias/cambiarEstado/' . $noticia['id']) ?>">
-            <button class="btn btn-azul" name="accion" value="validar">
-                Reenviar para Validación
-            </button>
+                <form method="post" action="<?= base_url('noticias/editar/' . $noticia['id']) ?>">
+                    <button class="btn btn-gris" name="accion" value="editar">
+                        Editar
+                    </button>
+                </form>   
+                    
+                <form method="post" action="<?= base_url('noticias/cambiarEstado/' . $noticia['id']) ?>">
+                    <button class="btn btn-azul" name="accion" value="validar">
+                        Reenviar para Validación
+                    </button>
 
-        </form>
+                </form>
 
-    <?php else: ?>
+                <?php else: ?>
 
-       <form method="post" action="<?= base_url('noticias/detalle/' .  $noticia['id']) ?>"> <button class="btn btn-azuloscuro" name="accion" value="ver">
-                Ver detalle
-            </button>
-        </form>  
+                <form method="post" action="<?= base_url('noticias/detalle/' .  $noticia['id']) ?>"> 
+                    <button class="btn btn-azuloscuro" name="accion" value="ver">
+                        Ver detalle
+                    </button>
+                </form>  
+
+                <?php endif; ?>
+            <?php else: ?>
+
+            
+            <form method="post" action="<?= base_url('noticias/detalle/' .  $noticia['id']) ?>">      <button class="btn btn-azuloscuro" name="accion" value="ver">
+                    Ver detalle
+                </button>
+            </form>  
 
     <?php endif; ?>
-    <?php else: ?>
-
-    <!-- Si NO es editor, solo puede ver -->
-    <form method="post" action="<?= base_url('noticias/detalle/' .  $noticia['id']) ?>">     <button class="btn btn-azuloscuro" name="accion" value="ver">
-        Ver detalle
-    </button>
-    </form>  
-
-<?php endif; ?>
-
+    </div>
 </div>
-        </div>
 
-    <?php endforeach; ?>
+<?php endforeach; ?>
 
 </div>
 </div>

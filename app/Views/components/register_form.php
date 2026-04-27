@@ -1,23 +1,22 @@
 <?php $errors = session()->getFlashdata('errors') ?? []; ?>
   
-    
 <form method="post" action="<?= base_url('registro') ?>">
 
-    <input type="text" name="nombre" placeholder="Nombre" value="<?= old('nombre') ?>"
-          class="form-input">
-            <?php if (isset($errors['nombre'])): ?>
-    <div class="error-text">
-        <?= $errors['nombre'] ?>
-    </div>
-<?php endif; ?>
+    <input type="text" name="nombre" placeholder="Nombre" value="<?= old('nombre') ?>" class="form-input">
 
-    <input type="text" name="email" placeholder="Correo Electrónico" value="<?= old('email') ?>"
-           class="form-input">
-            <?php if (isset($errors['email'])): ?>
-            <div class="error-text">
-                <?= $errors['email'] ?>
-            </div>
-            <?php endif; ?>
+    <?php if (isset($errors['nombre'])): ?>
+        <div class="error-text">
+            <?= $errors['nombre'] ?>
+        </div>
+    <?php endif; ?>
+
+    <input type="text" name="email" placeholder="Correo Electrónico" value="<?= old('email') ?>" class="form-input">
+
+    <?php if (isset($errors['email'])): ?>
+        <div class="error-text">
+            <?= $errors['email'] ?>
+        </div>
+    <?php endif; ?>
 
     <div class="input-container">
         <input type="password" name="password" placeholder="Contraseña" class="form-input" id="registerPassword">
@@ -25,9 +24,9 @@
     </div>
 
     <?php if (isset($errors['password'])): ?>
-    <div class="error-text">
-        <?= $errors['password'] ?>
-    </div>
+        <div class="error-text">
+            <?= $errors['password'] ?>
+        </div>
     <?php endif; ?>
 
     <div class="input-container">
@@ -36,9 +35,9 @@
     </div>
 
     <?php if (isset($errors['confirmar'])): ?>
-    <div class="error-text">
-        <?= $errors['confirmar'] ?>
-    </div>
+        <div class="error-text">
+            <?= $errors['confirmar'] ?>
+        </div>
     <?php endif; ?>
 
 <div class="roles-container">

@@ -6,11 +6,10 @@
 
     <div class="crear-card">
 
-        <!-- TITULO -->
         <h3 class="crear-titulo">
             Editar Noticia
         </h3>
-         <!-- ESTADO -->
+         
              <?php
             $color = "#eee";
 
@@ -21,63 +20,55 @@
             }
         ?>
 
-            <div class="estado-contenedor">
+        <div class="estado-contenedor">
             <span class="estado" style="background:<?= $color ?>">
                 <?= $noticia['estado'] ?>
             </span>
         </div>
         <form method="post" action="/app_tp1/public/noticias/guardar/<?= $noticia['id'] ?>" enctype="multipart/form-data">
 
-            <!-- TITULO -->
+            
             <label><b>Título:</b></label><br>
             <input type="text" name="titulo" value="<?= $noticia['titulo'] ?>"class="input">
 
-
-            <!-- DESCRIPCION -->
             <label><b>Descripción:</b></label><br>
             <textarea name="descripcion" class="input"><?= $noticia['descripcion'] ?></textarea>
 
-            <!-- IMAGEN -->
             <label><b>Imagen</b></label><br>
             <div class="bloque-imagen">
 
-            <!-- Preview (solo si hay imagen) -->
-            <?php if (!empty($noticia['imagen'])): ?>
-                <div class="preview-container">
-                    <img id="previewImagen"
-                        src="<?= base_url('uploads/' . $noticia['imagen']) ?>">
+                <?php if (!empty($noticia['imagen'])): ?>
+                    <div class="preview-container">
+                        <img id="previewImagen"
+                            src="<?= base_url('uploads/' . $noticia['imagen']) ?>">
+                    </div>
+                <?php else: ?>
+                    <div class="preview-container">
+                        <img id="previewImagen" style="display:none;">
+                    </div>
+                <?php endif; ?>
+
+                <div style="margin-top:10px;">
+
+                    <label for="inputImagen" class="btn btn-validar">
+                        Cambiar imagen
+                    </label>
+
+                    <label class="checkbox-editar">
+                        <input type="checkbox" name="quitar_imagen">
+                        Quitar imagen
+                    </label>
+
                 </div>
-            <?php else: ?>
-                <div class="preview-container">
-                    <img id="previewImagen" style="display:none;">
-                </div>
-            <?php endif; ?>
 
-            <!-- Botones SIEMPRE -->
-            <div style="margin-top:10px;">
-
-                <label for="inputImagen" class="btn btn-validar">
-                    Cambiar imagen
-                </label>
-
-                <label class="checkbox-editar">
-                    <input type="checkbox" name="quitar_imagen">
-                    Quitar imagen
-                </label>
-
+                <input type="file" id="inputImagen" name="imagen" hidden>
             </div>
-
-            <!-- Input -->
-            <input type="file" id="inputImagen" name="imagen" hidden>
-
-        </div>
            
-
-            <!-- BOTONES -->
             <div class="acciones">
 
-                <a href="/app_tp1/public/noticias/mis" class="volver">
-                    ← Volver
+                <a href="<?= base_url('noticias') ?>" class="detalle-volver">
+                    <img src="<?= base_url('img/flecha-volver.png') ?>" width="16" style="vertical-align:middle;">
+                    Volver
                 </a>
 
                  <div class="botones">

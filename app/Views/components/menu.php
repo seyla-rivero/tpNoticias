@@ -1,6 +1,6 @@
 <?php if (session()->get('logueado')): ?>
 
-<!-- MENÚ LATERAL -->
+<!-- Menu lateral -->
 <div id="sidebar" class="sidebar">
 
     <h2>Menú</h2>
@@ -27,8 +27,7 @@
     </a>
 
 </div>
-
-<!-- OVERLAY -->
+<!-- Overlay -->
 <div id="overlay" onclick="toggleMenu()" class="overlay"></div>
 
 <?php endif; ?>
@@ -37,7 +36,7 @@ function toggleMenu() {
     var sidebar = document.getElementById("sidebar");
     var overlay = document.getElementById("overlay");
 
-    if (!sidebar) return; // evita error si no está logueado
+    if (!sidebar) return; 
 
     if (sidebar.style.left === "0px") {
         sidebar.style.left = "-300px";

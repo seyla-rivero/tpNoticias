@@ -3,38 +3,34 @@
 <?= $this->section('contenido') ?>
 <link rel="stylesheet" href="<?= base_url('css/crear.css') ?>">
 
-<!--<div class="main-content">-->
 <div class="crear-container">
     <div class="crear-card">
        
         <h3 class="crear-titulo">Crear Noticia</h3>
         
-
         <form id="formNoticia" method="post" action="/app_tp1/public/noticias/guardar" enctype="multipart/form-data">
 
-            <!-- TITULO -->
             <label><b>Título:</b></label><br>
             <input type="text" id="titulo" name="titulo"
                 value="<?= old('titulo') ?>" 
                 class="input <?= session('errors.titulo') ? 'input-error' : '' ?>">
             <?php if (session('errors.titulo')): ?>
-            <p class="error">
-               <?= session('errors.titulo') ?>
-            </p>
+                <p class="error">
+                  <?= session('errors.titulo') ?>
+                </p>
             <?php endif; ?>
 
-            <!-- DESCRIPCION -->
+            
             <label><b>Descripción:</b></label><br>
-            <textarea name="descripcion"
-                class="input <?= session('errors.descripcion') ? 'input-error' : '' ?>"
+            <textarea name="descripcion" class="input <?= session('errors.descripcion') ? 'input-error' : '' ?>"
                 ><?= old('descripcion') ?></textarea>
             <?php if (session('errors.descripcion')): ?>
-            <p class="error">
-                <?= session('errors.descripcion') ?>
-            </p>
+                <p class="error">
+                    <?= session('errors.descripcion') ?>
+                </p>
             <?php endif; ?>
 
-            <!-- IMAGEN -->
+            
             <div class="bloque-imagen">
                 <label>Imagen (Opcional)</label>
 
@@ -48,7 +44,7 @@
                 </div>
             </div>
 
-            <!-- BOTONES -->
+           
             <div class="acciones">
                 
                 <a href="/app_tp1/public/noticias/mis" class="volver">
@@ -72,19 +68,17 @@
             </div>
 
         </form>
-                <!-- EL MODAL DE GUARDAR CAMBIOS -->
+                
         <div id="modalError" class="modal">
-        <div class="modal-content">
-            <h2>Atención</h2>
-            <p>El título y la descrición son obligatorios.</p>
-            <button class="btn-cerrar" onclick="cerrarModal()">Cerrar</button>
-        </div>
+            <div class="modal-content">
+                <h2>Atención</h2>
+                <p>El título y la descrición son obligatorios.</p>
+                <button class="btn-cerrar" onclick="cerrarModal()">Cerrar</button>
+            </div>
         </div>
 
     </div>
-      
 </div>
-<!--</div>-->
 <script>
 function mostrarModal() {
   document.getElementById("modalError").style.display = "flex";
@@ -104,42 +98,40 @@ document.getElementById("formNoticia").addEventListener("submit", function(e) {
   }
 });
 
-// DRAG & DROP + PREVIEW
 const dropArea = document.getElementById("drop-area");
 const input = document.getElementById("imagen");
 const preview = document.getElementById("previewImagen");
 
-// Click abre selector
+
 dropArea.addEventListener("click", () => input.click());
 
-// Selección normal
+
 input.addEventListener("change", (e) => {
   mostrarImagen(e.target.files[0]);
 });
 
-// Drag encima
+
 dropArea.addEventListener("dragover", (e) => {
   e.preventDefault();
   dropArea.classList.add("activo");
 });
 
-// Sale del área
+
 dropArea.addEventListener("dragleave", () => {
   dropArea.classList.remove("activo");
 });
 
-// Soltar archivo
 dropArea.addEventListener("drop", (e) => {
   e.preventDefault();
   dropArea.classList.remove("activo");
 
   const archivo = e.dataTransfer.files[0];
-  input.files = e.dataTransfer.files; // importante para el form
+  input.files = e.dataTransfer.files; 
 
   mostrarImagen(archivo);
 });
 
-// Función única de preview
+
 function mostrarImagen(file) {
   if (!file || !file.type.startsWith("image/")) return;
 

@@ -56,5 +56,4 @@ function togglePassword(id, icon) {
         icon.classList.add("fa-eye");
     }
 }
-
 </script>

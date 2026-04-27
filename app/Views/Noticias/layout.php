@@ -14,14 +14,15 @@
 </head>
 <body style="margin:0; font-family: Arial;">
 
-    <!-- Header -->
+    <!-- Header-->
     <?= view('components/header') ?>
     <?= view('components/menu') ?>
 
-    <!-- CONTENIDO -->
+    <!-- Fondo-->
     <div style="padding: 30px; background: #f3e8ff; min-height: 100vh;">
         <?= $this->renderSection('contenido') ?>
     </div>
+
     <!-- Modal de Login y Registro-->
     <?= view('components/modals') ?>
     <?= view('Noticias/recuperar_password') ?>

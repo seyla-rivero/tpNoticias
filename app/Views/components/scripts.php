@@ -1,9 +1,7 @@
 <!-- Scripts del modal Login y Registro -->
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-
     let modal = "<?= session()->getFlashdata('modal') ?>";
-
     if (modal === 'login') {
         document.getElementById("loginFormModal").style.display = "flex";
     }
@@ -40,12 +38,13 @@ function cerrarRegistro() {
     document.getElementById("registroModal").style.display = "none";
 }
 
+//Control de abril modal recuperar contraseña
 window.onload = function() {
     <?php if (session()->getFlashdata('recuperar')): ?>
         abrirModalRecuperar();
     <?php endif; ?>
 }
-
+//Mensaje de éxito de Crear y Editar noticia
 setTimeout(() => {
     const toast = document.querySelector('.toast-success');
     if (toast) {
@@ -55,7 +54,7 @@ setTimeout(() => {
 }, 3000);
 
 </script>
-
+<!--Modal de recuperar-->
 <script id="i4f1xr">
 function abrirModalRecuperar() {
     document.getElementById('modalRecuperar').style.display = 'flex';

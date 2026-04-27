@@ -6,16 +6,15 @@
     <h2 class="titulo-seccion">Configuración</h2>
 
     <?php if(session()->getFlashdata('success')): ?>
-    <div class="alert-success">
-        <?= session()->getFlashdata('success') ?>
-    </div>
+        <div class="alert-success">
+            <?= session()->getFlashdata('success') ?>
+        </div>
     <?php endif; ?>
 
     <div class="card-config">
 
         <form action="<?= base_url('noticias/configuracion/guardar') ?>" method="post">
 
-            <!-- 🔹 DÍAS -->
             <div class="config-item">
                 <label>Cantidad de días para expirar una noticia</label>
 
@@ -25,12 +24,11 @@
                     <span>días</span>
                 </div>
 
-                <small>Duración en días antes que una noticia expire automáticamente.</small>
+                <small>Duración en días antes que una noticia expire automáticamente.
+                </small>
             </div>
-
             <hr>
 
-            <!-- 🔹 IMAGEN -->
             <div class="config-item">
                 <label>Tamaño máximo de imagen</label>
 
@@ -43,14 +41,10 @@
                 <small>Tamaño máximo permitido para imágenes.</small>
             </div>
 
-            <!-- 🔘 BOTÓN -->
             <div class="config-actions">
                 <button type="submit">Guardar Cambios</button>
             </div>
-
         </form>
-
     </div>
-
 </div>
 <?= $this->endSection() ?>

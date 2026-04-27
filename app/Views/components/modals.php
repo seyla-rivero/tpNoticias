@@ -1,4 +1,4 @@
- <!-- Login opcion Registrarse o Iniciar sesion -->
+ <!-- Login opción Registrarse o Iniciar sesión -->
 <div id="loginModal" class="modal">
 
     <div class="modal-box">
@@ -25,7 +25,7 @@
 </div>
 
 
-<!-- Login de inicio sesion -->
+<!-- Login de inicio sesión -->
 <div id="loginFormModal" class="modal">
 
     <div class="modal-box">

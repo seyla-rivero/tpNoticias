@@ -4,11 +4,8 @@
 <div class="detalle-container">
 
     <div class="detalle-card">
-    
-
-        <!-- HEADER -->
+        
         <div class="detalle-header">
-
             <h2>
                 <?= $noticia['titulo'] ?>
             </h2>
@@ -24,7 +21,6 @@
 
         </div>
 
-        <!-- ESTADO -->
         <?php
             $color = "#eee";
 
@@ -45,26 +41,29 @@
                 <?= $noticia['estado'] ?>
             </span>
         </div>
-
-        <!-- INFO -->
         <div class="detalle-info">
 
-            <span>👤 <?= $noticia['autor_nombre'] ?? 'Autor' ?></span>
+            <span>
+                <img src="<?= base_url('img/autor.png') ?>" width="16" style="vertical-align:middle;">
+                 <?= $noticia['autor_nombre'] ?? 'Autor' ?>
+            </span>
 
-            <span>📅 Creada: <?= date('d/m/Y', strtotime($noticia['fecha_creacion'])) ?></span>
+            <span>
+                <img src="<?= base_url('img/fecha-icon.png') ?>" width="16" style="vertical-align:middle;">
+                Creada: <?= date('d/m/Y', strtotime($noticia['fecha_creacion'])) ?>
+            </span>
 
             <?php if ($noticia['estado'] == 'Publicada'): ?>
 
             <span>
-                📅 Publicada: 
-                <?= date('d/m/Y', strtotime($noticia['fecha_publicacion'])) ?>
+                <img src="<?= base_url('img/fecha-icon.png') ?>" width="16" style="vertical-align:middle;">
+                Publicada: <?= date('d/m/Y', strtotime($noticia['fecha_publicacion'])) ?>
             </span>
 
             <?php endif; ?>
 
         </div>
 
-        <!-- IMAGEN -->
         <div class="detalle-img">
 
             <?php if ($noticia['imagen']): ?>
@@ -76,29 +75,22 @@
             <?php endif; ?>
 
         </div>
-        <!-- DESCRIPCIÓN -->
+
         <p class="detalle-descripcion">
             <?= $noticia['descripcion'] ?>
         </p>
-
         <hr>
-
-        <!-- BOTONES -->
         <div class="detalle-botones">
-
-            <!-- VOLVER -->
-
-            <a href="<?= base_url('noticias') ?>" 
-            class="detalle-volver">
-                ← Volver
+            <a href="<?= base_url('noticias') ?>" class="detalle-volver">
+                <img src="<?= base_url('img/flecha-volver.png') ?>" width="16" style="vertical-align:middle;">
+                Volver
             </a>
 
-            <!-- ACCIONES -->
             <div class="detalle-acciones">
 
                 <?php if ($noticia['estado'] == 'Borrador'): ?>
 
-                     <form method="post" action="<?= base_url('noticias/editar/' . $noticia['id']) ?>">
+                    <form method="post" action="<?= base_url('noticias/editar/' . $noticia['id']) ?>">
                         <button class="btn btn-gris" name="accion" value="editar">
                             Editar
                         </button>
@@ -119,10 +111,10 @@
 
                 <?php elseif ($noticia['estado'] == 'Para Corrección'): ?>
 
-                     <form method="post" action="<?= base_url('noticias/cambiarEstado/' . $noticia['id']) ?>">
-                    <button class="btn btn-gris" name="accion" value="editar">
-                        Editar
-                    </button>
+                    <form method="post" action="<?= base_url('noticias/cambiarEstado/' . $noticia['id']) ?>">
+                        <button class="btn btn-gris" name="accion" value="editar">
+                            Editar
+                        </button>
                     </form>
                     
                     <form method="post" action="/noticias/cambiarEstado/<?= $noticia['id'] ?>">
@@ -137,15 +129,15 @@
                             && $noticia['autor_id'] != session()->get('id')): ?>
 
                         <form method="post" action="<?= base_url('noticias/cambiarEstado/' . $noticia['id']) ?>">
-                        <button class="btn btn-verde" name="accion" value="publicar">
+                            <button class="btn btn-verde" name="accion" value="publicar">
                                 Publicar
                             </button>
                         </form>
 
                         <form method="post" action="<?= base_url('noticias/cambiarEstado/' . $noticia['id']) ?>">
-                           <button class="btn btn-naranja" name="accion" value="correccion">
-                            Para Corrección
-                           </button>
+                            <button class="btn btn-naranja" name="accion" value="correccion">
+                                Para Corrección
+                            </button>
                         </form>
 
                     <?php endif; ?>

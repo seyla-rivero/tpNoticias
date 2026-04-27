@@ -7,7 +7,6 @@
 
     <?php $destacada = $noticias[0]; ?>
 
-    <!-- 🔥 NOTICIA DESTACADA -->
     <div class="featured">
 
        <div class="featured-img" style="background-image: url('<?= base_url('uploads/' .     ($destacada['imagen'] ?? 'default.jpg')) ?>')">
@@ -36,19 +35,17 @@
 
     </div>
 
-    <!-- 🧱 GRID DE NOTICIAS -->
+    
     <div class="news-grid">
 
         <?php foreach (array_slice($noticias, 1) as $n): ?>
 
             <div class="news-card">
 
-                <!-- IMAGEN -->
                 <div class="news-img">
                     <img src="<?= base_url('uploads/' . ($n['imagen'] ?? 'default.jpg')) ?>" alt="imagen">
                 </div>
 
-                <!-- CONTENIDO -->
                 <div class="news-body">
 
                     <div class="news-date">
