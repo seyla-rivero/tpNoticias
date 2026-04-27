@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Panel</title>
+    <link rel="icon" type="image/png" href="<?= base_url('img/logo-bts.png') ?>">
     <link rel="stylesheet" href="<?= base_url('css/crear.css') ?>">
     <link rel="stylesheet" href="<?= base_url('css/publicadas.css') ?>">
     <link rel="stylesheet" href="<?= base_url('css/detalle.css') ?>">

@@ -200,10 +200,22 @@ class Noticias extends BaseController{
             ]);
         }
         //Redirige con mensaje de éxito
+        $accion = $this->request->getPost('accion');
+
         if ($id) {
-            return redirect()->to('/noticias')->with('success', 'Noticia actualizada con éxito');
+
+            if ($accion === 'validar') {
+                return redirect()->to('/noticias')
+                    ->with('success', 'Noticia enviada a validación correctamente');
+            }
+
+            return redirect()->to('/noticias')
+                ->with('success', 'Noticia actualizada con éxito');
+
         } else {
-            return redirect()->to('/noticias')->with('success', 'Noticia creada con éxito');
+
+            return redirect()->to('/noticias')
+                ->with('success', 'Noticia creada con éxito');
         }
     }
     //Cambia el estado de una noticia
@@ -306,7 +318,30 @@ class Noticias extends BaseController{
             'estado_nuevo' => $data['estado']
         ]);
         
-        return redirect()->to($redirect);
+        //Mensaje según acción
+        $mensaje = '';
+
+        switch ($accion) {
+
+            case 'validar':
+                $mensaje = 'Noticia enviada a validación correctamente';
+                break;
+
+            case 'publicar':
+                $mensaje = 'Noticia publicada con éxito';
+                break;
+
+            case 'correccion':
+                $mensaje = 'Noticia enviada para corrección';
+                break;
+
+            case 'anular':
+                $mensaje = 'Noticia anulada correctamente';
+                break;
+        }
+
+        return redirect()->to($redirect)
+            ->with('success', $mensaje);
     }
     //Muestras noticias en estado validación
     public function pendientes(){

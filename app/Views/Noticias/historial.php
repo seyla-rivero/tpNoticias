@@ -42,10 +42,10 @@ function iconoEstado($estado) {
         <div class="timeline-card">
 
             <div class="timeline-header">
-
+            
             <div style="display:flex; align-items:center; gap:10px;">
-                <div class="timeline-avatar">
-                    <?= strtoupper(substr($h['nombre'], 0, 1)) ?>
+                <div class="timeline-avatar"> 
+                    <?= strtoupper(substr($h['nombre'], 0, 1)) ?> 
                 </div>
 
                 <strong><?= $h['nombre'] ?></strong>
