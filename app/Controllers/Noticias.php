@@ -62,30 +62,37 @@ class Noticias extends BaseController{
         $configModel = new ConfiguracionModel();
         $historialModel = new HistorialModel();
         //Obtiene la cantidad de días configurados para expiración
-        $dias = $configModel->first()['dias_expiracion'];
+        // Obtener configuración
+        $config = $configModel->first();
+        $dias = $config['dias_expiracion'];
         
-        $noticias = $model->where('estado', 'Publicada')->findAll();
-        //Recorre todas las noticias publicadas
-        foreach ($noticias as $n) {
+        if ($dias > 0) {
+            // Calcular fecha límite
+            $fechaLimite = date('Y-m-d H:i:s', strtotime("-$dias days"));
+            
+            // Traer SOLO noticias que ya deberían estar expiradas
+            $noticias = $model
+                ->where('estado', 'Publicada')
+                ->where('fecha_publicacion <=', $fechaLimite)
+                ->findAll();
 
-            if ($n['fecha_publicacion']) {
+            //Recorre todas las noticias publicadas
+            foreach ($noticias as $n) {
 
-                if ((time() - strtotime($n['fecha_publicacion'])) > ($dias * 86400)) {
-                    
-                    //Si una noticia supera el tiempo, pasa a estado expirada y se registra en el historial
-                    $historialModel->save([
-                        'noticia_id' => $n['id'],
-                        'usuario_id' => 0, 
-                        'estado_anterior' => 'Publicada', 
-                        'estado_nuevo' => 'Expirada'
-                    ]);
+                // Guardar en historial
+                $historialModel->save([
+                    'noticia_id' => $n['id'],
+                    'usuario_id' => 0, // sistema
+                    'estado_anterior' => 'Publicada',
+                    'estado_nuevo' => 'Expirada'
+                ]);
 
-                    $model->update($n['id'], [
-                        'estado' => 'Expirada'
-                    ]);
-                }
+                // Actualizar estado
+                $model->update($n['id'], [
+                    'estado' => 'Expirada'
+                ]);
             }
-        }
+        }    
     }
     //Muestra el formulario para crear una noticia
     public function crear(){  

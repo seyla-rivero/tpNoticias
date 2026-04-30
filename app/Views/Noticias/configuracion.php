@@ -5,12 +5,6 @@
 
     <h2 class="titulo-seccion">Configuración</h2>
 
-    <?php if(session()->getFlashdata('success')): ?>
-        <div class="alert-success">
-            <?= session()->getFlashdata('success') ?>
-        </div>
-    <?php endif; ?>
-
     <div class="card-config">
 
         <form action="<?= base_url('noticias/configuracion/guardar') ?>" method="post">
@@ -20,7 +14,7 @@
 
                 <div class="input-group">
                     <input type="number" name="dias_expiracion"
-                        value="<?= $config['dias_expiracion'] ?>" required>
+                        value="<?= $config['dias_expiracion'] ?? '' ?>">
                     <span>días</span>
                 </div>
 
@@ -34,7 +28,7 @@
 
                 <div class="input-group">
                     <input type="number" name="max_imagen"
-                        value="<?= $config['max_imagen'] ?>" required>
+                        value="<?= $config['max_imagen'] ?? '' ?>">
                     <span>MB</span>
                 </div>
 
